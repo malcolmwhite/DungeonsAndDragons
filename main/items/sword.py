@@ -8,7 +8,6 @@ class Sword(BaseItem):
     _AVERAGE_ATK_BOOST = 5
     _ATK_SPREAD = 2.5
 
-
     def __init__(self, attack=None, defense=None, speed=None, spook_rate=None, spook_power=None):
         BaseItem.__init__(self, attack, defense, speed, spook_rate, spook_power)
         self.PRIMARY_VALUE = self.ATTACK_BOOST

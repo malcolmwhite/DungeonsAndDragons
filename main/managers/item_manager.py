@@ -40,7 +40,7 @@ class ItemManager(object):
         power = 0
         if self._HATS:
             hat = self._HATS[0]
-            hat_rate, hat_power = self._HATS[0].get_spook_rate_and_power()
+            hat_rate, hat_power = hat.get_spook_rate_and_power()
             rate += hat_rate
             power += hat_power
         return rate, power
@@ -49,7 +49,7 @@ class ItemManager(object):
         for item in items:
             self._validate_item(item)
             item_category = item.CATEGORY_NAME
-            item_list = method = getattr(self, item_category)
+            item_list = getattr(self, item_category)
             item_list.append(item)
             item_list.sort(key=lambda x: x.PRIMARY_VALUE, reverse=True)
 

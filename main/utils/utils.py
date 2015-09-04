@@ -4,10 +4,12 @@ from math import ceil
 from numpy.random import normal
 
 
+# noinspection PyNoneFunctionAssignment
 def generate_attribute(center_value, spread):
     if spread == 0:
         return center_value
     attribute = normal(center_value, spread)
+    # noinspection PyTypeChecker
     return int(ceil(attribute))
 
 
