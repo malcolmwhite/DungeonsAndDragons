@@ -3,7 +3,6 @@ from main.utils.utils import simulate_chance
 
 
 class BasePlayer(object):
-
     _SPOOK_ROUNDS_AHEAD = 0
     _SPOOK_PENALTY = 0
 

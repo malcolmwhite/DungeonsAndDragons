@@ -3,7 +3,6 @@ from main.managers.item_manager import ItemManager
 
 
 class Shield(BaseItem):
-
     CATEGORY_NAME = ItemManager.SHIELD_CATEGORY_NAME
 
     _AVERAGE_DEF_BOOST = 5

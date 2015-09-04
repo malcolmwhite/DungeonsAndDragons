@@ -3,7 +3,6 @@ from main.managers.item_manager import ItemManager
 
 
 class SpookyHat(BaseItem):
-
     CATEGORY_NAME = ItemManager.HAT_CATEGORY_NAME
 
     _AVERAGE_SPOOK_RATE = 5

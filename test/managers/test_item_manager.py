@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from main.items.sword import Sword
 from main.items.shield import Shield
 from main.items.shoes import Shoes
@@ -7,7 +8,6 @@ from main.managers.item_manager import ItemManager
 
 
 class TestItemManager(TestCase):
-
     def testAddSword(self):
         mgr = ItemManager()
         expected_attack_boost = 6

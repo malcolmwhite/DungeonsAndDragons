@@ -1,6 +1,7 @@
-from numpy.random import normal
 from random import randint
 from math import ceil
+
+from numpy.random import normal
 
 
 def generate_attribute(center_value, spread):
@@ -13,6 +14,7 @@ def generate_attribute(center_value, spread):
 def simulate_chance(percent_chance_success):
     dice_roll = randint(0, 99)
     return dice_roll < percent_chance_success
+
 
 def raise_(ex):
     raise ex

@@ -1,4 +1,5 @@
 from unittest import TestCase
+
 from main.items.sword import Sword
 from main.items.shield import Shield
 from main.items.shoes import Shoes
@@ -6,7 +7,6 @@ from main.items.spooky_hat import SpookyHat
 
 
 class TestItems(TestCase):
-
     def testSword(self):
         sword = Sword()
         self.assertEquals(sword.DEFENSE_BOOST, 0)

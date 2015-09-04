@@ -2,7 +2,6 @@ from main.items.base_item import BaseItem
 
 
 class ItemManager(object):
-
     SWORD_CATEGORY_NAME = "_SWORDS"
     SHIELD_CATEGORY_NAME = "_SHIELDS"
     HAT_CATEGORY_NAME = "_HATS"

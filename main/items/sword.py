@@ -3,7 +3,6 @@ from main.managers.item_manager import ItemManager
 
 
 class Sword(BaseItem):
-
     CATEGORY_NAME = ItemManager.SWORD_CATEGORY_NAME
 
     _AVERAGE_ATK_BOOST = 5

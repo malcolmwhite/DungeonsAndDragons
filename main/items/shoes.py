@@ -3,7 +3,6 @@ from main.managers.item_manager import ItemManager
 
 
 class Shoes(BaseItem):
-
     CATEGORY_NAME = ItemManager.SHOE_CATEGORY_NAME
 
     _AVERAGE_SPEED_BOOST = 5
