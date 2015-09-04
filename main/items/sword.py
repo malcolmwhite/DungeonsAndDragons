@@ -11,7 +11,3 @@ class Sword(BaseItem):
     def __init__(self, attack=None, defense=None, speed=None, spook_rate=None, spook_power=None):
         BaseItem.__init__(self, attack, defense, speed, spook_rate, spook_power)
         self.PRIMARY_VALUE = self.ATTACK_BOOST
-
-    @staticmethod
-    def category():
-        return 'Sword'
