@@ -64,3 +64,21 @@ class TestItemManager(TestCase):
         self.assertEquals(retrieved_sword, strongest_sword)
         actual_attack_boost = mgr.get_atk_boost()
         self.assertEqual(expected_attack_boost, actual_attack_boost)
+
+    def testDumpItems(self):
+        original_manager = ItemManager()
+        expected_attack_boost = 11
+        sword1 = Sword(attack=5)
+        sword2 = Sword(attack=7)
+        strongest_sword = Sword(attack=11)
+        sword4 = Sword(attack=9)
+        sword5 = Sword(attack=1)
+        original_manager.add_items(sword1, sword2, strongest_sword, sword4, sword5)
+        dumped_items = original_manager.dump_all_items()
+        old_attack_boost = original_manager.get_atk_boost()
+        self.assertEqual(old_attack_boost, 0)
+        self.assertEqual(len(dumped_items), 5)
+        new_manager = ItemManager()
+        new_manager.add_items(*dumped_items)
+        new_attack_boost = new_manager.get_atk_boost()
+        self.assertEqual(expected_attack_boost, new_attack_boost)

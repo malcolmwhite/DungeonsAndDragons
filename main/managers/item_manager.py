@@ -46,12 +46,22 @@ class ItemManager(object):
         return rate, power
 
     def add_items(self, *items):
-        for item in items:
-            self._validate_item(item)
-            item_category = item.CATEGORY_NAME
-            item_list = getattr(self, item_category)
-            item_list.append(item)
-            item_list.sort(key=lambda x: x.PRIMARY_VALUE, reverse=True)
+        map(self.add_item, items)
+
+    def add_item(self, item):
+        self._validate_item(item)
+        item_category = item.CATEGORY_NAME
+        item_list = getattr(self, item_category)
+        item_list.append(item)
+        item_list.sort(key=lambda x: x.PRIMARY_VALUE, reverse=True)
+
+    def dump_all_items(self):
+        dumped_items = []
+        for category in self._CATEGORY_NAMES:
+            items = getattr(self, category)
+            dumped_items.extend(items)
+            del items[:]
+        return dumped_items
 
     def get_sword(self):
         return self._get_active_item(self._SWORDS)
