@@ -2,7 +2,11 @@ from random import shuffle
 
 
 class BasePlayerManager(object):
-    _PLAYERS = []
+
+    def __init__(self, players=None):
+        self._PLAYERS = []
+        if players is not None:
+            self.add_players(players)
 
     def generate_players(self, num_players):
         raise NotImplementedError("Generate players has not been implemented.")
@@ -18,7 +22,11 @@ class BasePlayerManager(object):
     def get_inactive_players(self):
         return [player for player in self._PLAYERS if not player.is_active()]
 
-    def _add_player(self, player):
+    def add_players(self, players):
+        for player in players:
+            self.add_player(player)
+
+    def add_player(self, player):
         self._PLAYERS.append(player)
 
     @staticmethod
@@ -35,6 +43,7 @@ class BasePlayerManager(object):
                     right_index = current_index - 1
                     shuffle(players[left_index:right_index])
                     left_index = current_index
+            last_priority = current_priority
         # shuffle the last section
         right_index = len(players) - 1
         shuffle(players[left_index:right_index])
