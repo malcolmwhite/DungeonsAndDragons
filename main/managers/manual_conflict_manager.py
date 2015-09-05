@@ -1,5 +1,4 @@
 from base_conflict_manager import BaseConflictManager
-from base_player_manager import BasePlayerManager
 from random import randint
 
 
@@ -34,28 +33,28 @@ class ManualConflictManager(BaseConflictManager):
 
     @staticmethod
     def _validate_input(players, order):
-            num_players = len(players)
-            order_set = set(order)
-            num_specified_indices = len(order)
-            num_unique_indices = len(order_set)
-            min_index = min(order_set)
-            max_index = max(order_set)
-            min_allowable_index = 0
-            max_allowable_index = num_players - 1
-            if num_specified_indices > num_players:
-                print "You must specify", num_players, "indices. You specified", num_specified_indices
-                print "Specified list was: " + order
-                return False
-            elif num_unique_indices != num_players:
-                print "You must specify", num_players, " unique indices. You specified", num_specified_indices
-                print "Specified list was: " + order
-                return False
-            elif max_index > max_allowable_index:
-                print "You must not specify an index greater than ", max_allowable_index, " You specified", max_index
-                print "Specified list was: " + order
-                return False
-            elif min_index > min_allowable_index:
-                print "You must not specify an index less than ", min_allowable_index, " You specified", min_index
-                print "Specified list was: " + order
-                return False
-            return True
+        num_players = len(players)
+        order_set = set(order)
+        num_specified_indices = len(order)
+        num_unique_indices = len(order_set)
+        min_index = min(order_set)
+        max_index = max(order_set)
+        min_allowable_index = 0
+        max_allowable_index = num_players - 1
+        if num_specified_indices > num_players:
+            print "You must specify", num_players, "indices. You specified", num_specified_indices
+            print "Specified list was: " + order
+            return False
+        elif num_unique_indices != num_players:
+            print "You must specify", num_players, " unique indices. You specified", num_specified_indices
+            print "Specified list was: " + order
+            return False
+        elif max_index > max_allowable_index:
+            print "You must not specify an index greater than ", max_allowable_index, " You specified", max_index
+            print "Specified list was: " + order
+            return False
+        elif min_index > min_allowable_index:
+            print "You must not specify an index less than ", min_allowable_index, " You specified", min_index
+            print "Specified list was: " + order
+            return False
+        return True

@@ -1,4 +1,3 @@
-from base_player_manager import BasePlayerManager
 from main.utils.utils import get_trimmed_or_padded_string
 import logging
 from itertools import izip_longest
@@ -37,7 +36,11 @@ class BaseConflictManager(object):
         challenger.initialize_conflict()
         challenged.initialize_conflict()
         logging.info("Beginning conflict. %s challenging %s.", challenger.NAME, challenged.NAME)
-        if challenger.is_active() and challenged.is_active():
+        if not challenger.is_active():
+            logging.info("Challenger %s is not active.", challenger.NAME)
+        elif not challenged.is_active():
+            logging.info("Challenged player %s is not active.", challenged.NAME)
+        else:
             spook_rate, spook_power = challenged.get_spook_params()
             spook_success = challenger.receive_spook(spook_rate, spook_power)
             if spook_success:
@@ -46,9 +49,13 @@ class BaseConflictManager(object):
             damage_inflicted = challenged.receive_attack(attack_points)
             logging.info("%s inflicted %d damage to %s.", challenger.NAME, damage_inflicted, challenged.NAME)
             if not challenged.is_active():
-                logging.info("%s is no longer active. Their items pass to %s.", challenged.NAME, challenger.NAME)
+                logging.info("%s is no longer active. Items pass to %s.", challenged.NAME, challenger.NAME)
                 items_won = challenged.dump_all_items()
                 challenger.add_items(items_won)
+        BaseConflictManager._finalize_conflict(challenger, challenged)
+
+    @staticmethod
+    def _finalize_conflict(challenger, challenged):
         challenger.finalize_conflict()
         challenged.finalize_conflict()
         BaseConflictManager._log_conflict_results(True, challenger, challenged)

@@ -77,7 +77,7 @@ class ItemManager(object):
     def get_formatted_items(self):
         output = "Items: "
         prefix = ""
-        regular_prefix = " "*7
+        regular_prefix = " " * 7
         first_item = True
         for category in self._CATEGORY_NAMES:
             items = getattr(self, category)

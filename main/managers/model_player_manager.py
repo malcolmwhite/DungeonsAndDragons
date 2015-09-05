@@ -4,8 +4,8 @@ from main.players.base_player import BasePlayer
 from main.items.spooky_hat import SpookyHat
 from main.items.shield import Shield
 
-class ModelPlayerManager(BasePlayerManager):
 
+class ModelPlayerManager(BasePlayerManager):
     def generate_players(self, num_players):
         self.build_example_players()
 

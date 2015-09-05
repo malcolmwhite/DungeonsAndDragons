@@ -21,7 +21,7 @@ class BasePlayerManager(object):
     @staticmethod
     def sort_players(players):
         # Sort players by priority
-        players.sort(key=lambda player: player.get_conflict_priority(), reverse=True)
+        players.sort(key=lambda p: p.get_conflict_priority(), reverse=True)
         # Shuffle within priorities
         left_index = 0
         last_priority = None
