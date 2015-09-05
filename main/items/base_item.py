@@ -18,8 +18,6 @@ class BaseItem(object):
     _SPOOK_RATE_SPREAD = 0
     _SPOOK_POWER_SPREAD = 0
 
-    PRIMARY_VALUE = lambda: raise_(NotImplementedError("PRIMARY_VALUE is not implemented."))
-
     def __init__(self, attack=None, defense=None, speed=None, spook_rate=None, spook_power=None):
         if spook_power is not None and spook_power < 0:
             raise ValueError("spook_power must be greater than zero. Specified value was " + spook_power)
@@ -33,6 +31,9 @@ class BaseItem(object):
                                                                                        self._SPOOK_RATE_SPREAD)
         self.SPOOK_POWER = spook_power if spook_power is not None else generate_attribute(self._AVERAGE_SPOOK_POWER,
                                                                                           self._SPOOK_POWER_SPREAD)
+
+        self.PRIMARY_VALUE = lambda: raise_(NotImplementedError("PRIMARY_VALUE is not implemented."))
+
 
     def get_spook_rate_and_power(self):
         return self.SPOOK_RATE, self.SPOOK_POWER
