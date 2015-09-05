@@ -12,7 +12,8 @@ def generate_attribute(center_value, spread):
     attribute = normal(center_value, spread)
     min_value = 1
     # noinspection PyTypeChecker
-    return min(int(ceil(attribute)), min_value)
+    attribute = int(ceil(attribute))
+    return max(attribute, min_value)
 
 
 def simulate_chance(percent_chance_success):
