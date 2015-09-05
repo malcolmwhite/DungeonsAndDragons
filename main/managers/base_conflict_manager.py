@@ -64,7 +64,7 @@ class BaseConflictManager(object):
     @staticmethod
     def _log_conflict_results(only_active, *players):
         players = list(players)
-        players.sort(key=lambda p: p.NAME, reverse=True)
+        players.sort(key=lambda p: p.NAME)
         cell_width = 25
         overall_result = []
         attributes = ["get_formatted_name", "get_formatted_attack", "get_formatted_defense", "get_formatted_hp",

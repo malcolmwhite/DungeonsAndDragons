@@ -5,7 +5,6 @@ import itertools as it
 from numpy.random import normal
 
 
-
 # noinspection PyNoneFunctionAssignment
 def generate_attribute(center_value, spread):
     if spread == 0:
@@ -22,11 +21,6 @@ def simulate_chance(percent_chance_success):
 
 def raise_(ex):
     raise ex
-
-
-def skip_i(iterable, i):
-    itr = iter(iterable)
-    return it.chain(it.islice(itr, 0, i), it.islice(itr, 1, None))
 
 
 def get_trimmed_or_padded_string(value, width):
@@ -46,12 +40,18 @@ def get_padded_attribute(instance, attribute, cell_width):
 
 def join_multi_line_strings(blocks, cell_width):
         output = ""
-        while blocks:
-            left = blocks.pop()
-            right = blocks.pop() if blocks else ""
-            left = left.splitlines()
-            right = right.splitlines()
-            if_missing = " " * cell_width
+        left = blocks[0].splitlines()
+        len_left = len(left)
+        if_missing = " " * cell_width
+        for block in blocks[1:]:
+            right = block.splitlines()
+            line_no = 0
             for left_line, right_line in it.izip_longest(left, right, fillvalue=if_missing):
-                output += left_line + right_line + "\n"
+                if line_no > len_left:
+                    left.append(if_missing)
+                left[line_no] += right_line
+                line_no += 1
+
+        for line in left:
+            output += line + "\n"
         return output
