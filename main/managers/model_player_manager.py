@@ -16,6 +16,6 @@ class ModelPlayerManager(BasePlayerManager):
 
         bob_shield = Shield(defense=1)
         bob_item_manager = ItemManager([bob_shield])
-        bob = BasePlayer(item_manager=bob_item_manager, name="Bob", hp=10, defense=4, atk=5)
+        bob = BasePlayer(item_manager=bob_item_manager, name="Bob", hp=8, defense=4, atk=5)
         self._add_player(alice)
         self._add_player(bob)

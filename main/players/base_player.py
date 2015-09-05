@@ -35,10 +35,6 @@ class BasePlayer(object):
         if self._SPOOK_ROUNDS_AHEAD > 0:
             self._decrement_spook()
 
-    def confront_with_item(self, item):
-        if simulate_chance(item.SPOOK_RATE):
-            self._initialize_spook(item.SPOOK_POWER)
-
     def get_conflict_priority(self):
         boost = self.item_manager.get_speed_boost()
         return self._SPEED + boost
