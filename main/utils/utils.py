@@ -2,6 +2,7 @@ from random import randint
 from math import ceil
 
 from numpy.random import normal
+import itertools as it
 
 
 # noinspection PyNoneFunctionAssignment
@@ -20,3 +21,14 @@ def simulate_chance(percent_chance_success):
 
 def raise_(ex):
     raise ex
+
+
+def skip_i(iterable, i):
+    itr = iter(iterable)
+    return it.chain(it.islice(itr, 0, i), it.islice(itr, 1, None))
+
+
+def get_trimmed_or_padded_string(value, width):
+    padding_needed = max(width - len(value), 0)
+    padding = " "*padding_needed
+    return value[:width] + padding

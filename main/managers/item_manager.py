@@ -8,12 +8,11 @@ class ItemManager(object):
     SHOE_CATEGORY_NAME = "_SHOES"
     _CATEGORY_NAMES = {SWORD_CATEGORY_NAME, SHIELD_CATEGORY_NAME, HAT_CATEGORY_NAME, SHOE_CATEGORY_NAME}
 
-    _SWORDS = []
-    _SHIELDS = []
-    _HATS = []
-    _SHOES = []
-
     def __init__(self, items=None):
+        self._SWORDS = []
+        self._SHIELDS = []
+        self._HATS = []
+        self._SHOES = []
         if items:
             self.add_items(items)
 
@@ -45,7 +44,7 @@ class ItemManager(object):
             power += hat_power
         return rate, power
 
-    def add_items(self, *items):
+    def add_items(self, items):
         map(self.add_item, items)
 
     def add_item(self, item):
@@ -74,6 +73,22 @@ class ItemManager(object):
 
     def get_shoes(self):
         return self._get_active_item(self._SHOES)
+
+    def get_formatted_items(self):
+        output = "Items: "
+        prefix = ""
+        regular_prefix = " "*7
+        first_item = True
+        for category in self._CATEGORY_NAMES:
+            items = getattr(self, category)
+            for item in items:
+                line = prefix + item.get_formatted_name()
+                output = output + line + "\n"
+                if first_item:
+                    prefix = regular_prefix
+                    first_item = False
+        return output[:-1]
+
 
     @staticmethod
     def _add_item_and_sort(item, items):

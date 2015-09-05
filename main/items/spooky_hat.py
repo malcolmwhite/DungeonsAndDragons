@@ -11,8 +11,10 @@ class SpookyHat(BaseItem):
     _SPOOK_RATE_SPREAD = 2.5
     _SPOOK_POWER_SPREAD = 2.5
 
-    PRIMARY_VALUE = BaseItem.SPOOK_RATE * BaseItem.SPOOK_POWER
-
     def __init__(self, attack=None, defense=None, speed=None, spook_rate=None, spook_power=None):
         BaseItem.__init__(self, attack, defense, speed, spook_rate, spook_power)
 
+        self.PRIMARY_VALUE = self.SPOOK_RATE * self.SPOOK_POWER
+
+    def get_formatted_name(self):
+        return "Hat (" + str(self.SPOOK_RATE) + "%, -" + str(self.SPOOK_POWER) + ")"
