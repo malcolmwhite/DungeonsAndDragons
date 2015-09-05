@@ -15,6 +15,9 @@ class BasePlayerManager(object):
     def get_active_players(self):
         return [player for player in self._PLAYERS if player.is_active()]
 
+    def get_inactive_players(self):
+        return [player for player in self._PLAYERS if not player.is_active()]
+
     def _add_player(self, player):
         self._PLAYERS.append(player)
 
