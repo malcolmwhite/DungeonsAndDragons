@@ -1,10 +1,10 @@
+from random import randint
+
 from base_conflict_manager import BaseConflictManager
 from base_player_manager import BasePlayerManager
-from random import randint
 
 
 class AutomatedConflictManager(BaseConflictManager):
-
     def _pick_conflict(self, challenger, players, index):
         num_players = len(players)
         last_index = num_players - 1

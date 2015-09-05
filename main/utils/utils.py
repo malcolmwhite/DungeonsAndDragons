@@ -1,8 +1,9 @@
 from random import randint
 from math import ceil
+import itertools as it
 
 from numpy.random import normal
-import itertools as it
+
 
 
 # noinspection PyNoneFunctionAssignment
@@ -30,5 +31,5 @@ def skip_i(iterable, i):
 
 def get_trimmed_or_padded_string(value, width):
     padding_needed = max(width - len(value), 0)
-    padding = " "*padding_needed
+    padding = " " * padding_needed
     return value[:width] + padding

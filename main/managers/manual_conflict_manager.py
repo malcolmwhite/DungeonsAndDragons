@@ -1,5 +1,6 @@
-from base_conflict_manager import BaseConflictManager
 from random import randint
+
+from base_conflict_manager import BaseConflictManager
 
 
 class ManualConflictManager(BaseConflictManager):

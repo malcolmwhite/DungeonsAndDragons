@@ -1,10 +1,10 @@
-from main.utils.utils import get_trimmed_or_padded_string
 import logging
 from itertools import izip_longest
 
+from main.utils.utils import get_trimmed_or_padded_string
+
 
 class BaseConflictManager(object):
-
     def __init__(self, player_manager):
         self.player_manager = player_manager
         logging.basicConfig(level=logging.DEBUG)
@@ -64,7 +64,8 @@ class BaseConflictManager(object):
     def _log_conflict_results(only_active, *players):
         cell_width = 25
         overall_result = []
-        attributes = ["get_formatted_name", "get_formatted_attack", "get_formatted_defense", "get_formatted_hp", "get_formatted_items"]
+        attributes = ["get_formatted_name", "get_formatted_attack", "get_formatted_defense", "get_formatted_hp",
+                      "get_formatted_items"]
         for player in players:
             if player.is_active():
                 player_result = ""
@@ -91,7 +92,7 @@ class BaseConflictManager(object):
             right = blocks.pop() if blocks else ""
             left = left.splitlines()
             right = right.splitlines()
-            if_missing = " "*cell_width
+            if_missing = " " * cell_width
             for left_line, right_line in izip_longest(left, right, fillvalue=if_missing):
                 output += left_line + right_line + "\n"
         return output[:-1]
