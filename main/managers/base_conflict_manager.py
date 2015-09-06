@@ -23,8 +23,9 @@ class BaseConflictManager(object):
         self._sort_players(players)
         challenge_map = self._build_challenge_map(players)
         for challenger in players:
-            challenged = challenge_map[challenger]
-            self._run_conflict(challenger, challenged)
+            if self.player_manager.get_num_active_players() > 1:
+                challenged = challenge_map[challenger]
+                self._run_conflict(challenger, challenged)
 
     def _build_challenge_map(self, players):
         challenge_map = dict()
