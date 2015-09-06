@@ -43,10 +43,10 @@ class TestGameManager(TestCase):
 
     class ExampleGameManager(BaseGameManager):
         def _build_player_manager(self):
-            self.player_manager = self.HardCodedPlayerManager()
+            return self.HardCodedPlayerManager()
 
         def _build_conflict_manager(self, player_manager):
-            self.conflict_manager = self.ValidateSampleConflictManager(player_manager)
+            return self.ValidateSampleConflictManager(player_manager)
 
         class ValidateSampleConflictManager(AutomatedConflictManager):
             ROUND_TO_REVERSE_MAP = {0: True, 1: False, 2:True}
