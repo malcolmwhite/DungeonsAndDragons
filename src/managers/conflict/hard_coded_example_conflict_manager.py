@@ -1,4 +1,4 @@
-from main.managers.conflict.automated_conflict_manager import AutomatedConflictManager
+from src.managers.conflict.automated_conflict_manager import AutomatedConflictManager
 
 
 class HardCodedExampleConflictManager(AutomatedConflictManager):

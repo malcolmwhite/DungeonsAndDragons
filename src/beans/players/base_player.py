@@ -1,6 +1,7 @@
-from main.utils.utils import generate_attribute
-from main.utils.utils import simulate_chance
-from main.managers.items.item_manager import ItemManager
+from src.utils.utils import generate_attribute
+from src.utils.utils import simulate_chance
+from src.utils.utils import get_trimmed_or_padded_string
+from src.managers.items.item_manager import ItemManager
 
 
 class BasePlayer(object):
@@ -17,13 +18,17 @@ class BasePlayer(object):
     _DEF_SPREAD = 2.5
     _ATK_SPREAD = 2.5
 
+
+
     def __init__(self, name, item_manager=None, speed=None, hp=None, defense=None, atk=None):
         self.NAME = name
         self.item_manager = item_manager if item_manager is not None else ItemManager()
-        self._SPEED = speed if speed is not None else generate_attribute(self._AVERAGE_SPEED, self._SPEED_SPREAD)
-        self.HP = hp if hp is not None else generate_attribute(self._AVERAGE_HP, self._HP_SPREAD)
-        self._DEF = defense if defense is not None else generate_attribute(self._AVERAGE_DEF, self._DEF_SPREAD)
-        self._ATK = atk if atk is not None else generate_attribute(self._AVERAGE_ATK, self._ATK_SPREAD)
+        self._SPEED = int(speed) if speed is not None else generate_attribute(self._AVERAGE_SPEED, self._SPEED_SPREAD)
+        self.HP = int(hp) if hp is not None else generate_attribute(self._AVERAGE_HP, self._HP_SPREAD)
+        self._DEF = int(defense) if defense is not None else generate_attribute(self._AVERAGE_DEF, self._DEF_SPREAD)
+        self._ATK = int(atk) if atk is not None else generate_attribute(self._AVERAGE_ATK, self._ATK_SPREAD)
+        self._LOG_ATTRIBUTES = [self.get_formatted_name, self.get_formatted_attack, self.get_formatted_defense,
+                                self.get_formatted_hp, self.get_formatted_items]
 
     def __str__(self):
         return ''.join([str(self.NAME), ' ', str(self.HP)])
@@ -100,6 +105,14 @@ class BasePlayer(object):
 
     def get_formatted_items(self):
         return self.item_manager.get_formatted_items()
+
+    def get_summary(self):
+        summary = ""
+        width = 25
+        for attribute in self._LOG_ATTRIBUTES:
+            attribute_line = get_trimmed_or_padded_string(attribute(), width)
+            summary += attribute_line + "\n"
+        return summary
 
     def _get_attack_penalty(self):
         return self._SPOOK_PENALTY

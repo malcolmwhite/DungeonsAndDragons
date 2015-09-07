@@ -1,5 +1,5 @@
-from main.beans.items.base_item import BaseItem
-from main.managers.items.item_manager import ItemManager
+from src.beans.items.base_item import BaseItem
+from src.managers.items.item_manager import ItemManager
 
 
 class Shield(BaseItem):

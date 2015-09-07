@@ -1,6 +1,6 @@
-from main.managers.game.base_game_manager import BaseGameManager
-from main.managers.conflict.automated_conflict_manager import AutomatedConflictManager
-from main.managers.players.base_player_manager import BasePlayerManager
+from src.managers.game.base_game_manager import BaseGameManager
+from src.managers.conflict.automated_conflict_manager import AutomatedConflictManager
+from src.managers.players.base_player_manager import BasePlayerManager
 
 
 class AutomatedGameManager(BaseGameManager):

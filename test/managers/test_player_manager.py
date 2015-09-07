@@ -1,8 +1,8 @@
 from unittest import TestCase
 from itertools import permutations
 
-from main.managers.players.base_player_manager import BasePlayerManager
-from main.beans.players.base_player import BasePlayer
+from src.managers.players.base_player_manager import BasePlayerManager
+from src.beans.players.base_player import BasePlayer
 
 
 class TestPlayerManager(TestCase):
@@ -16,8 +16,7 @@ class TestPlayerManager(TestCase):
 
         for players_perm in permutations(players):
             players_perm = list(players_perm)
-            player_manager = BasePlayerManager()
-            player_manager.add_players(players_perm)
+            player_manager = BasePlayerManager(players_perm)
             player_manager.sort_players(players_perm)
             self.validate_players(players_perm, player0, player1, player2, player3)
 

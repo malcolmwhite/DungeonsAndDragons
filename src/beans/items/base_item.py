@@ -1,6 +1,6 @@
-from main.utils.utils import generate_attribute
+from src.utils.utils import generate_attribute
 
-from main.utils.utils import raise_
+from src.utils.utils import raise_
 
 
 class BaseItem(object):

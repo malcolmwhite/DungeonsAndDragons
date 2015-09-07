@@ -1,4 +1,4 @@
-import main.utils.utils as utils
+import src.utils.utils as utils
 from unittest import TestCase
 
 

@@ -1,5 +1,5 @@
-from main.managers.conflict.base_conflict_manager import BaseConflictManager
-
+from src.managers.conflict.base_conflict_manager import BaseConflictManager
+from ..players.base_player_manager import BasePlayerManager
 
 class ManualConflictManager(BaseConflictManager):
     def _pick_conflict(self, challenger, players, index):
@@ -26,20 +26,23 @@ class ManualConflictManager(BaseConflictManager):
         return challenged
 
     def _sort_players(self, players):
-        print "Specify order for players in this round."
-        print "Players are:"
-        for index, player in enumerate(players):
-            print index, player.NAME
-        valid_input = False
-        order = []
-        while not valid_input:
-            order_input = raw_input("Please enter player indices in the order they will act.")
-            order = order_input.split()
-            order = [int(i) for i in order]
-            valid_input = self._validate_order_input(players, order)
-
-        ordered_players = [players[i] for i in order]
+        ordered_players = BasePlayerManager.sort_players(players)
+        print "player order is ", ordered_players
         return ordered_players
+        # print "Specify order for players in this round."
+        # print "Players are:"
+        # for index, player in enumerate(players):
+        #     print index, player.NAME
+        # valid_input = False
+        # order = []
+        # while not valid_input:
+        #     order_input = raw_input("Please enter player indices in the order they will act.")
+        #     order = order_input.split()
+        #     order = [int(i) for i in order]
+        #     valid_input = self._validate_order_input(players, order)
+        #
+        # ordered_players = [players[i] for i in order]
+        # return ordered_players
 
 
     @staticmethod

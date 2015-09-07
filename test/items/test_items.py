@@ -1,9 +1,9 @@
 from unittest import TestCase
 
-from main.beans.items.sword import Sword
-from main.beans.items.shield import Shield
-from main.beans.items.shoes import Shoes
-from main.beans.items.spooky_hat import SpookyHat
+from src.beans.items.sword import Sword
+from src.beans.items.shield import Shield
+from src.beans.items.shoes import Shoes
+from src.beans.items.spooky_hat import SpookyHat
 
 
 class TestItems(TestCase):

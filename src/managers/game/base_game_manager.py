@@ -1,4 +1,4 @@
-from main.utils.utils import raise_
+# from main.utils.utils import raise_
 
 
 class BaseGameManager(object):
@@ -13,7 +13,9 @@ class BaseGameManager(object):
         return self.conflict_manager.run()
 
     def _build_player_manager(self):
-        raise_(NotImplementedError("This function has not been implemented"))
+        pass
+        # raise_(NotImplementedError("This function has not been implemented"))
 
     def _build_conflict_manager(self, player_manager):
-        raise_(NotImplementedError("This function has not been implemented"))
+        pass
+        # raise_(NotImplementedError("This function has not been implemented"))

@@ -7,6 +7,8 @@ class BasePlayerManager(object):
         self._PLAYERS = []
         if players is not None:
             self.add_players(players)
+        else:
+            self.generate_players()
 
     def generate_players(self, num_players=None):
         raise NotImplementedError("Generate players has not been implemented.")

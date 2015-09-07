@@ -1,7 +1,7 @@
 import logging
 
-from main.utils.utils import get_padded_attribute
-from main.utils.utils import join_multi_line_strings
+from src.utils.utils import get_padded_attribute
+from src.utils.utils import join_multi_line_strings
 
 
 class BaseConflictManager(object):
@@ -67,17 +67,13 @@ class BaseConflictManager(object):
         players = list(players)
         players.sort(key=lambda p: p.NAME)
         cell_width = 25
-        overall_result = []
-        attributes = ["get_formatted_name", "get_formatted_attack", "get_formatted_defense", "get_formatted_hp",
-                      "get_formatted_items"]
+        overall_summary = []
+
         for player in players:
             if player.is_active() or not only_active:
-                player_result = ""
-                for attribute in attributes:
-                    attribute_line = get_padded_attribute(player, attribute, cell_width)
-                    player_result += attribute_line + "\n"
-                overall_result.append(player_result)
-        print join_multi_line_strings(overall_result, cell_width)
+                player_summary = player.get_summary()
+                overall_summary.append(player_summary)
+        print join_multi_line_strings(overall_summary, cell_width)
 
     def _pick_conflict(self, challenger, players, index):
         raise NotImplementedError("_pick_conflict has not been implemented.")

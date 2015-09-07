@@ -1,4 +1,4 @@
-from main.beans.items.base_item import BaseItem
+from src.beans.items.base_item import BaseItem
 
 
 class ItemManager(object):

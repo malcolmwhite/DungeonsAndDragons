@@ -1,7 +1,7 @@
 from random import randint
 
-from main.managers.conflict.base_conflict_manager import BaseConflictManager
-from main.managers.players.base_player_manager import BasePlayerManager
+from src.managers.conflict.base_conflict_manager import BaseConflictManager
+from src.managers.players.base_player_manager import BasePlayerManager
 
 
 class AutomatedConflictManager(BaseConflictManager):
