@@ -60,10 +60,10 @@ class BaseConflictManager(object):
     def _finalize_conflict(challenger, challenged):
         challenger.finalize_conflict()
         challenged.finalize_conflict()
-        BaseConflictManager._log_conflict_results(True, challenger, challenged)
+        BaseConflictManager._log_player_results(True, challenger, challenged)
 
     @staticmethod
-    def _log_conflict_results(only_active, *players):
+    def _log_player_results(only_active, *players):
         players = list(players)
         players.sort(key=lambda p: p.NAME)
         cell_width = 25

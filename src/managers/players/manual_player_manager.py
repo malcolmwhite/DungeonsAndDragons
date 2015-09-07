@@ -19,7 +19,7 @@ class ManualPlayerManager(BasePlayerManager):
                 self.add_player(player)
 
         def _build_player_from_cmd(self):
-            name = raw_input("Please enter the player's name.")
+            name = raw_input("Please enter the player's name.\n\t")
             atk = self._build_attribute_from_cmd("attack rating")
             defense = self._build_attribute_from_cmd("defense rating")
             hp = self._build_attribute_from_cmd("initial hp")
@@ -32,14 +32,14 @@ class ManualPlayerManager(BasePlayerManager):
             return player
 
         def _build_attribute_from_cmd(self, attribute_name):
-            value = raw_input("Please enter the player's {}. Leave blank to auto-generate.".format(attribute_name))
+            value = raw_input("Please enter the player's {}. Leave blank to auto-generate.\n\t".format(attribute_name))
             if not len(value):
                 value = None
             return value
 
         def _build_item_from_cmd(self):
             while 1:
-                item_type = raw_input("Please specify item category. Options are: sword, shield, shoes, spooky hat.")
+                item_type = raw_input("Please specify item category. Options are: sword, shield, shoes, spooky hat.\n\t")
                 item_type_lower = item_type.lower()
                 if item_type_lower in self._ACCEPTABLE_SWORD_NAMES:
                     return Sword()
