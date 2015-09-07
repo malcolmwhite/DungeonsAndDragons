@@ -15,10 +15,11 @@ class TestPlayerManager(TestCase):
         players = [player0, player1, player2, player3]
 
         for players_perm in permutations(players):
+            players_perm = list(players_perm)
             player_manager = BasePlayerManager()
-            player_manager.add_players(players)
-            player_manager.sort_players(players)
-            self.validate_players(players, player0, player1, player2, player3)
+            player_manager.add_players(players_perm)
+            player_manager.sort_players(players_perm)
+            self.validate_players(players_perm, player0, player1, player2, player3)
 
     def validate_players(self, players, player0, player1, player2, player3):
         self.assertEqual(players[0], player0)
