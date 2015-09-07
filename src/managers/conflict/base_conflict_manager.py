@@ -1,6 +1,5 @@
 import logging
 
-from src.utils.utils import get_padded_attribute
 from src.utils.utils import join_multi_line_strings
 
 

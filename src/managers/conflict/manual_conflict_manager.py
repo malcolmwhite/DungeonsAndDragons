@@ -13,7 +13,8 @@ class ManualConflictManager(BaseConflictManager):
         valid_input = False
         challenged = None
         while not valid_input:
-            challenged_input = raw_input("Please enter the name of the player to be challenged by {}.\n\t".format(challenger.NAME))
+            challenged_input = raw_input(
+                "Please enter the name of the player to be challenged by {}.\n\t".format(challenger.NAME))
             for player in players:
                 if player.NAME.lower() == challenged_input:
                     if player == challenger:

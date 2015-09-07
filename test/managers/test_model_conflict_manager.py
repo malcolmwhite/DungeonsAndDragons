@@ -1,15 +1,10 @@
 from unittest import TestCase
 
-from src.managers.items.item_manager import ItemManager
 from src.managers.players.hard_coded_player_manager import HardCodedPlayerManager
 from src.managers.conflict.hard_coded_example_conflict_manager import HardCodedExampleConflictManager
-from src.beans.players.base_player import BasePlayer
-from src.beans.items.spooky_hat import SpookyHat
-from src.beans.items.shield import Shield
 
 
 class TestModelConflictManager(TestCase):
-
     def testStandardConflict(self):
         player_manager = HardCodedPlayerManager()
         conflict_manager = HardCodedExampleConflictManager(player_manager)
@@ -42,53 +37,53 @@ class TestModelConflictManager(TestCase):
         self.assertEqual(len(bob.item_manager._HATS), 0)
         self.assertFalse(bob.is_spooked())
 
-    # class ValidateSampleConflictManager(AutomatedConflictManager):
-    #     ROUND_TO_REVERSE_MAP = {0: True, 1: False, 2:True}
-    #
-    #     def __init__(self, player_manager):
-    #         AutomatedConflictManager.__init__(self, player_manager)
-    #         self.round = 0
-    #
-    #     def _sort_players(self, players):
-    #         if self.ROUND_TO_REVERSE_MAP[self.round]:
-    #             player0 = players[0]
-    #             players[0] = players[1]
-    #             players[1] = player0
-    #         return players
-    #
-    #     def _run_round(self, players):
-    #         AutomatedConflictManager._run_round(self, players)
-    #         self.round += 1
+        # class ValidateSampleConflictManager(AutomatedConflictManager):
+        # ROUND_TO_REVERSE_MAP = {0: True, 1: False, 2:True}
+        #
+        #     def __init__(self, player_manager):
+        #         AutomatedConflictManager.__init__(self, player_manager)
+        #         self.round = 0
+        #
+        #     def _sort_players(self, players):
+        #         if self.ROUND_TO_REVERSE_MAP[self.round]:
+        #             player0 = players[0]
+        #             players[0] = players[1]
+        #             players[1] = player0
+        #         return players
+        #
+        #     def _run_round(self, players):
+        #         AutomatedConflictManager._run_round(self, players)
+        #         self.round += 1
 
-    # class HardCodedPlayerManager(BasePlayerManager):
-    #     def generate_players(self, num_players):
-    #         self.build_example_players()
-    #
-    #     def build_example_players(self):
-    #         alice_hat = SpookyHat(spook_power=2, spook_rate=25)
-    #         alice_item_manager = self.HardCodedAliceItemManager([alice_hat])
-    #         alice = BasePlayer(item_manager=alice_item_manager, name="Alice", hp=5, defense=3, atk=7)
-    #
-    #         bob_shield = Shield(defense=1)
-    #         bob_item_manager = ItemManager([bob_shield])
-    #         bob = BasePlayer(item_manager=bob_item_manager, name="Bob", hp=8, defense=4, atk=5)
-    #         self.add_player(alice)
-    #         self.add_player(bob)
-    #
-    #     class HardCodedAliceItemManager(ItemManager):
-    #         def __init__(self, items):
-    #             ItemManager.__init__(self, items)
-    #             self.first_run = True
-    #
-    #         def get_spook_params(self):
-    #             power = 0
-    #             if self._HATS:
-    #                 hat = self._HATS[0]
-    #                 hat_rate, hat_power = hat.get_spook_rate_and_power()
-    #                 power += hat_power
-    #             if self.first_run:
-    #                 rate = 100
-    #                 self.first_run = False
-    #             else:
-    #                 rate = 0
-    #             return rate, power
+        # class HardCodedPlayerManager(BasePlayerManager):
+        #     def generate_players(self, num_players):
+        #         self.build_example_players()
+        #
+        #     def build_example_players(self):
+        #         alice_hat = SpookyHat(spook_power=2, spook_rate=25)
+        #         alice_item_manager = self.HardCodedAliceItemManager([alice_hat])
+        #         alice = BasePlayer(item_manager=alice_item_manager, name="Alice", hp=5, defense=3, atk=7)
+        #
+        #         bob_shield = Shield(defense=1)
+        #         bob_item_manager = ItemManager([bob_shield])
+        #         bob = BasePlayer(item_manager=bob_item_manager, name="Bob", hp=8, defense=4, atk=5)
+        #         self.add_player(alice)
+        #         self.add_player(bob)
+        #
+        #     class HardCodedAliceItemManager(ItemManager):
+        #         def __init__(self, items):
+        #             ItemManager.__init__(self, items)
+        #             self.first_run = True
+        #
+        #         def get_spook_params(self):
+        #             power = 0
+        #             if self._HATS:
+        #                 hat = self._HATS[0]
+        #                 hat_rate, hat_power = hat.get_spook_rate_and_power()
+        #                 power += hat_power
+        #             if self.first_run:
+        #                 rate = 100
+        #                 self.first_run = False
+        #             else:
+        #                 rate = 0
+        #             return rate, power

@@ -6,7 +6,6 @@ from src.beans.players.base_player import BasePlayer
 
 
 class TestPlayerManager(TestCase):
-
     def test_add_players(self):
         player0 = BasePlayer(speed=100, name="FASTEST")
         player1 = BasePlayer(speed=5, name="Middle1")

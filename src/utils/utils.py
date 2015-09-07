@@ -34,30 +34,30 @@ def get_trimmed_or_padded_string(value, width):
 
 
 def get_padded_attribute(instance, attribute, cell_width):
-        value = getattr(instance, attribute)()
-        value = value.splitlines()
-        result = ""
-        for line in value:
-            result += get_trimmed_or_padded_string(line, cell_width) + "\n"
-        return result[:-1]
+    value = getattr(instance, attribute)()
+    value = value.splitlines()
+    result = ""
+    for line in value:
+        result += get_trimmed_or_padded_string(line, cell_width) + "\n"
+    return result[:-1]
 
 
 def join_multi_line_strings(blocks, cell_width):
-        output = ""
-        left = blocks[0].splitlines()
-        if_missing = " " * cell_width
-        for block in blocks[1:]:
-            right = block.splitlines()
-            line_no = 0
-            for left_line, right_line in it.izip_longest(left, right, fillvalue=if_missing):
-                while line_no >= len(left):
-                    left.append(if_missing)
-                left[line_no] += right_line
-                line_no += 1
+    output = ""
+    left = blocks[0].splitlines()
+    if_missing = " " * cell_width
+    for block in blocks[1:]:
+        right = block.splitlines()
+        line_no = 0
+        for left_line, right_line in it.izip_longest(left, right, fillvalue=if_missing):
+            while line_no >= len(left):
+                left.append(if_missing)
+            left[line_no] += right_line
+            line_no += 1
 
-        for line in left:
-            output += line + "\n"
-        return output
+    for line in left:
+        output += line + "\n"
+    return output
 
 
 def query_yes_no(question, default="yes"):

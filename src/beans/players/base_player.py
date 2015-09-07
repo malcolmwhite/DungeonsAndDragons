@@ -19,7 +19,6 @@ class BasePlayer(object):
     _ATK_SPREAD = 2.5
 
 
-
     def __init__(self, name, item_manager=None, speed=None, hp=None, defense=None, atk=None):
         self.NAME = name
         self.item_manager = item_manager if item_manager is not None else ItemManager()

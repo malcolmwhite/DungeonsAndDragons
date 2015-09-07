@@ -2,7 +2,6 @@
 
 
 class BaseGameManager(object):
-
     def __init__(self):
         player_manager = self._build_player_manager()
         conflict_manager = self._build_conflict_manager(player_manager)

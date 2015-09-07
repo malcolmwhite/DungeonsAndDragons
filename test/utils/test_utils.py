@@ -1,5 +1,6 @@
-import src.utils.utils as utils
 from unittest import TestCase
+
+import src.utils.utils as utils
 
 
 class TestUtils(TestCase):
@@ -39,4 +40,4 @@ class TestUtils(TestCase):
         for _ in xrange(num_tests):
             if utils.simulate_chance(test_rate):
                 num_success += 1
-        return float(num_success)*100 / num_tests
+        return float(num_success) * 100 / num_tests

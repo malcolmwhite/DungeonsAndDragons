@@ -2,7 +2,6 @@ from random import shuffle
 
 
 class BasePlayerManager(object):
-
     def __init__(self, players=None):
         self._PLAYERS = []
         if players is not None:
