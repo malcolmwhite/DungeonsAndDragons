@@ -1,8 +1,12 @@
+import logging
 from random import shuffle
 
 
 class BasePlayerManager(object):
     def __init__(self, players=None):
+        self.LOG = logging.getLogger(__name__)
+        logging.basicConfig(level=logging.DEBUG)
+
         self._PLAYERS = []
         if players is not None:
             self.add_players(players)
@@ -31,7 +35,20 @@ class BasePlayerManager(object):
             self.add_player(player)
 
     def add_player(self, player):
-        self._PLAYERS.append(player)
+        if self._validate_new_player(player):
+            self._PLAYERS.append(player)
+            self.LOG.info("Added player:\n" + player.get_summary())
+
+    def _validate_new_player(self, player):
+        if not len(player.NAME):
+            self.LOG.error("Players cannot have empty names.")
+            return False
+        for existing_player in self._PLAYERS:
+            if existing_player.NAME.lower() == player.NAME.lower():
+                self.LOG.error("Player with name " + player.NAME + " already exists.")
+                return False
+        return True
+
 
     @staticmethod
     def sort_players(players):

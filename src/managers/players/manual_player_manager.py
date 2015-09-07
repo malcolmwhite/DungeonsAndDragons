@@ -27,8 +27,6 @@ class ManualPlayerManager(BasePlayerManager):
         player = BasePlayer(name, None, speed, hp, defense, atk)
         item = self._build_item_from_cmd()
         player.add_item(item)
-        print "Added player: "
-        print player.get_summary()
         return player
 
     def _build_attribute_from_cmd(self, attribute_name):
