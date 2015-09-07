@@ -6,7 +6,6 @@ from sys import stdout
 from numpy.random import normal
 
 
-
 # noinspection PyNoneFunctionAssignment
 def generate_attribute(center_value, spread):
     if spread == 0:

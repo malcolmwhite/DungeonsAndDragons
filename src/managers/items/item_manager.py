@@ -89,7 +89,6 @@ class ItemManager(object):
                     first_item = False
         return output[:-1]
 
-
     @staticmethod
     def _add_item_and_sort(item, items):
         items.append(item)

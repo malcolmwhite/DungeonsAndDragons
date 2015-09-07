@@ -29,7 +29,8 @@ class ManualPlayerManager(BasePlayerManager):
         player.add_item(item)
         return player
 
-    def _build_attribute_from_cmd(self, attribute_name):
+    @staticmethod
+    def _build_attribute_from_cmd(attribute_name):
         value = raw_input("Please enter the player's {}. Leave blank to auto-generate.\n\t".format(attribute_name))
         if not len(value):
             value = None

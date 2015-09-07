@@ -49,7 +49,6 @@ class BasePlayerManager(object):
                 return False
         return True
 
-
     @staticmethod
     def sort_players(players):
         # Sort players by priority

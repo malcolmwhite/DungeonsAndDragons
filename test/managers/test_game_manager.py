@@ -1,11 +1,6 @@
 from unittest import TestCase
 
-from src.managers.items.item_manager import ItemManager
-from src.managers.players.base_player_manager import BasePlayerManager
 from src.managers.conflict.hard_coded_example_conflict_manager import HardCodedExampleConflictManager
-from src.beans.players.base_player import BasePlayer
-from src.beans.items.spooky_hat import SpookyHat
-from src.beans.items.shield import Shield
 from src.managers.game.base_game_manager import BaseGameManager
 from src.managers.players.hard_coded_player_manager import HardCodedPlayerManager
 

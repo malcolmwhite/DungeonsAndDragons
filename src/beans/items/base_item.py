@@ -34,7 +34,6 @@ class BaseItem(object):
 
         self.PRIMARY_VALUE = lambda: raise_(NotImplementedError("PRIMARY_VALUE is not implemented."))
 
-
     def get_spook_rate_and_power(self):
         return self.SPOOK_RATE, self.SPOOK_POWER
 
