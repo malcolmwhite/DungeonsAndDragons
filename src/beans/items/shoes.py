@@ -5,8 +5,8 @@ from src.managers.items.item_manager import ItemManager
 class Shoes(BaseItem):
     CATEGORY_NAME = ItemManager.SHOE_CATEGORY_NAME
 
-    _AVERAGE_SPEED_BOOST = 5
-    _SPEED_SPREAD = 2.5
+    _AVERAGE_SPEED_BOOST = 1
+    _SPEED_SPREAD = 0
 
     def __init__(self, attack=None, defense=None, speed=None, spook_rate=None, spook_power=None):
         BaseItem.__init__(self, attack, defense, speed, spook_rate, spook_power)
