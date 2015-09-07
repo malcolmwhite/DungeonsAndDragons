@@ -45,13 +45,12 @@ def get_padded_attribute(instance, attribute, cell_width):
 def join_multi_line_strings(blocks, cell_width):
         output = ""
         left = blocks[0].splitlines()
-        len_left = len(left)
         if_missing = " " * cell_width
         for block in blocks[1:]:
             right = block.splitlines()
             line_no = 0
             for left_line, right_line in it.izip_longest(left, right, fillvalue=if_missing):
-                if line_no > len_left:
+                while line_no >= len(left):
                     left.append(if_missing)
                 left[line_no] += right_line
                 line_no += 1
