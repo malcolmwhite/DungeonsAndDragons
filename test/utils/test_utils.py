@@ -25,6 +25,14 @@ class TestUtils(TestCase):
         actual_string = utils.join_multi_line_strings(blocks, 7)
         self.assertEqual(expected_string, actual_string)
 
+        string_a = "A1     \nA2     \nA3     "
+        string_b = "B1     \nB2     \nB3     \nB4     "
+        string_c = "C1     \nC2     \nC3  "
+        expected_string = "A1     B1     C1     \nA2     B2     C2     \nA3     B3     C3  \n       B4            \n"
+        blocks = [string_a, string_b, string_c]
+        actual_string = utils.join_multi_line_strings(blocks, 7)
+        self.assertEqual(expected_string, actual_string)
+
     def _get_effective_rate(self, test_rate):
         num_success = 0
         num_tests = 100000
