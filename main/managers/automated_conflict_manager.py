@@ -18,4 +18,4 @@ class AutomatedConflictManager(BaseConflictManager):
         return players[challenged_index]
 
     def _sort_players(self, players):
-        BasePlayerManager.sort_players(players)
+        return BasePlayerManager.sort_players(players)

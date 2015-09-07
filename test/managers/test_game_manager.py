@@ -60,6 +60,7 @@ class TestGameManager(TestCase):
                     player0 = players[0]
                     players[0] = players[1]
                     players[1] = player0
+                return players
 
             def _run_round(self, players):
                 AutomatedConflictManager._run_round(self, players)

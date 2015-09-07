@@ -20,7 +20,7 @@ class BaseConflictManager(object):
 
     def _run_round(self, players):
         self.LOG.info("Beginning round.")
-        self._sort_players(players)
+        players = self._sort_players(players)
         challenge_map = self._build_challenge_map(players)
         for challenger in players:
             if self.player_manager.get_num_active_players() > 1:
@@ -51,7 +51,7 @@ class BaseConflictManager(object):
             damage_inflicted = challenged.receive_attack(attack_points)
             self.LOG.info("%s inflicted %d damage to %s.", challenger.NAME, damage_inflicted, challenged.NAME)
             if not challenged.is_active():
-                self.LOG.info("%s is no longer active. Items pass to %s.", challenged.NAME, challenger.NAME)
+                self.LOG.info("%s has defeated %s and takes all of their items.", challenger.NAME, challenged.NAME)
                 items_won = challenged.dump_all_items()
                 challenger.add_items(items_won)
         BaseConflictManager._finalize_conflict(challenger, challenged)

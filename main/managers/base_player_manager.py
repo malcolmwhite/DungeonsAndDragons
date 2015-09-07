@@ -50,3 +50,4 @@ class BasePlayerManager(object):
         # shuffle the last section
         right_index = len(players) - 1
         shuffle(players[left_index:right_index])
+        return players

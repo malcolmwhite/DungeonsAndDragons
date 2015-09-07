@@ -1,20 +1,29 @@
-from random import randint
-
 from base_conflict_manager import BaseConflictManager
 
 
 class ManualConflictManager(BaseConflictManager):
     def _pick_conflict(self, challenger, players, index):
-        num_players = len(players)
-        last_index = num_players - 1
+        print "Specify challenger for {}".format(challenger.NAME)
+        print "Players are:"
+        for player in players:
+            if player is not challenger:
+                print player.NAME
 
-        # reserve last index in case randint generates current index
-        available_indices = last_index - 1
-        challenged_index = randint(0, available_indices)
-        if challenged_index == index:
-            challenged_index = last_index
+        valid_input = False
+        challenged = None
+        while not valid_input:
+            challenged_input = raw_input("Please enter the name of the player to be challenged by {}.".format(challenger.NAME))
+            for player in players:
+                if player.NAME.lower() == challenged_input:
+                    if player == challenger:
+                        print "A player cannot challenge his or her self. Please pick a different player."
+                        break
+                    challenged = player
+                    print "You have specified {} to be challenged by {}.".format(challenged.NAME, challenger.NAME)
+                    valid_input = True
+                    break
 
-        return players[challenged_index]
+        return challenged
 
     def _sort_players(self, players):
         print "Specify order for players in this round."
@@ -27,13 +36,14 @@ class ManualConflictManager(BaseConflictManager):
             order_input = raw_input("Please enter player indices in the order they will act.")
             order = order_input.split()
             order = [int(i) for i in order]
-            valid_input = self._validate_input(players, order)
+            valid_input = self._validate_order_input(players, order)
 
         ordered_players = [players[i] for i in order]
+        return ordered_players
 
 
     @staticmethod
-    def _validate_input(players, order):
+    def _validate_order_input(players, order):
         num_players = len(players)
         order_set = set(order)
         num_specified_indices = len(order)
