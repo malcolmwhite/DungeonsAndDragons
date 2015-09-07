@@ -33,15 +33,6 @@ def get_trimmed_or_padded_string(value, width):
     return value[:width] + padding
 
 
-def get_padded_attribute(instance, attribute, cell_width):
-    value = getattr(instance, attribute)()
-    value = value.splitlines()
-    result = ""
-    for line in value:
-        result += get_trimmed_or_padded_string(line, cell_width) + "\n"
-    return result[:-1]
-
-
 def join_multi_line_strings(blocks, cell_width):
     output = ""
     left = blocks[0].splitlines()
