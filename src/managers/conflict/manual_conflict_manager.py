@@ -24,6 +24,8 @@ class ManualConflictManager(BaseConflictManager):
                     print "You have specified {} to be challenged by {}.".format(challenged.NAME, challenger.NAME)
                     valid_input = True
                     break
+            if not valid_input:
+                print "Name [{}] not recognized.\n".format(challenged_input)
 
         return challenged
 
