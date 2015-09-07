@@ -1,8 +1,8 @@
 from unittest import TestCase
-from main.managers.base_player_manager import BasePlayerManager
-from main.players.base_player import BasePlayer
-
 from itertools import permutations
+
+from main.managers.players.base_player_manager import BasePlayerManager
+from main.beans.players.base_player import BasePlayer
 
 
 class TestPlayerManager(TestCase):

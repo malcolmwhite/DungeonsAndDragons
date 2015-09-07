@@ -1,4 +1,4 @@
-from base_conflict_manager import BaseConflictManager
+from main.managers.conflict.base_conflict_manager import BaseConflictManager
 
 
 class ManualConflictManager(BaseConflictManager):

@@ -8,7 +8,7 @@ class BasePlayerManager(object):
         if players is not None:
             self.add_players(players)
 
-    def generate_players(self, num_players):
+    def generate_players(self, num_players=None):
         raise NotImplementedError("Generate players has not been implemented.")
 
     def initialize_round(self, shuffle_players=True):

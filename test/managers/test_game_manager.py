@@ -1,12 +1,13 @@
 from unittest import TestCase
-from main.managers.item_manager import ItemManager
-from main.managers.base_player_manager import BasePlayerManager
-from main.managers.automated_conflict_manager import AutomatedConflictManager
-from main.players.base_player import BasePlayer
-from main.items.spooky_hat import SpookyHat
-from main.items.shield import Shield
-from main.managers.base_game_manager import BaseGameManager
 
+from main.managers.items.item_manager import ItemManager
+from main.managers.players.base_player_manager import BasePlayerManager
+from main.managers.conflict.hard_coded_example_conflict_manager import HardCodedExampleConflictManager
+from main.beans.players.base_player import BasePlayer
+from main.beans.items.spooky_hat import SpookyHat
+from main.beans.items.shield import Shield
+from main.managers.game.base_game_manager import BaseGameManager
+from main.managers.players.hard_coded_player_manager import HardCodedPlayerManager
 
 class TestGameManager(TestCase):
 
@@ -43,62 +44,62 @@ class TestGameManager(TestCase):
 
     class ExampleGameManager(BaseGameManager):
         def _build_player_manager(self):
-            return self.HardCodedPlayerManager()
+            return HardCodedPlayerManager()
 
         def _build_conflict_manager(self, player_manager):
-            return self.ValidateSampleConflictManager(player_manager)
+            return HardCodedExampleConflictManager(player_manager)
 
-        class ValidateSampleConflictManager(AutomatedConflictManager):
-            ROUND_TO_REVERSE_MAP = {0: True, 1: False, 2:True}
-
-            def __init__(self, player_manager):
-                AutomatedConflictManager.__init__(self, player_manager)
-                self.round = 0
-
-            def _sort_players(self, players):
-                if self.ROUND_TO_REVERSE_MAP[self.round]:
-                    player0 = players[0]
-                    players[0] = players[1]
-                    players[1] = player0
-                return players
-
-            def _run_round(self, players):
-                AutomatedConflictManager._run_round(self, players)
-                self.round += 1
-
-        class HardCodedPlayerManager(BasePlayerManager):
-            def __init__(self):
-                BasePlayerManager.__init__(self)
-                self.build_example_players()
-
-            def generate_players(self, num_players):
-                self.build_example_players()
-
-            def build_example_players(self):
-                alice_hat = SpookyHat(spook_power=2, spook_rate=25)
-                alice_item_manager = self.HardCodedAliceItemManager([alice_hat])
-                alice = BasePlayer(item_manager=alice_item_manager, name="Alice", hp=5, defense=3, atk=7)
-
-                bob_shield = Shield(defense=1)
-                bob_item_manager = ItemManager([bob_shield])
-                bob = BasePlayer(item_manager=bob_item_manager, name="Bob", hp=8, defense=4, atk=5)
-                self.add_player(alice)
-                self.add_player(bob)
-
-            class HardCodedAliceItemManager(ItemManager):
-                def __init__(self, items):
-                    ItemManager.__init__(self, items)
-                    self.first_run = True
-
-                def get_spook_params(self):
-                    power = 0
-                    if self._HATS:
-                        hat = self._HATS[0]
-                        hat_rate, hat_power = hat.get_spook_rate_and_power()
-                        power += hat_power
-                    if self.first_run:
-                        rate = 100
-                        self.first_run = False
-                    else:
-                        rate = 0
-                    return rate, power
+        # class ValidateSampleConflictManager(AutomatedConflictManager):
+        #     ROUND_TO_REVERSE_MAP = {0: True, 1: False, 2:True}
+        #
+        #     def __init__(self, player_manager):
+        #         AutomatedConflictManager.__init__(self, player_manager)
+        #         self.round = 0
+        #
+        #     def _sort_players(self, players):
+        #         if self.ROUND_TO_REVERSE_MAP[self.round]:
+        #             player0 = players[0]
+        #             players[0] = players[1]
+        #             players[1] = player0
+        #         return players
+        #
+        #     def _run_round(self, players):
+        #         AutomatedConflictManager._run_round(self, players)
+        #         self.round += 1
+        #
+        # class HardCodedPlayerManager(BasePlayerManager):
+        #     def __init__(self):
+        #         BasePlayerManager.__init__(self)
+        #         self.build_example_players()
+        #
+        #     def generate_players(self, num_players):
+        #         self.build_example_players()
+        #
+        #     def build_example_players(self):
+        #         alice_hat = SpookyHat(spook_power=2, spook_rate=25)
+        #         alice_item_manager = self.HardCodedAliceItemManager([alice_hat])
+        #         alice = BasePlayer(item_manager=alice_item_manager, name="Alice", hp=5, defense=3, atk=7)
+        #
+        #         bob_shield = Shield(defense=1)
+        #         bob_item_manager = ItemManager([bob_shield])
+        #         bob = BasePlayer(item_manager=bob_item_manager, name="Bob", hp=8, defense=4, atk=5)
+        #         self.add_player(alice)
+        #         self.add_player(bob)
+        #
+        #     class HardCodedAliceItemManager(ItemManager):
+        #         def __init__(self, items):
+        #             ItemManager.__init__(self, items)
+        #             self.first_run = True
+        #
+        #         def get_spook_params(self):
+        #             power = 0
+        #             if self._HATS:
+        #                 hat = self._HATS[0]
+        #                 hat_rate, hat_power = hat.get_spook_rate_and_power()
+        #                 power += hat_power
+        #             if self.first_run:
+        #                 rate = 100
+        #                 self.first_run = False
+        #             else:
+        #                 rate = 0
+        #             return rate, power
