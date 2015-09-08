@@ -1,5 +1,4 @@
 import logging
-from random import shuffle
 
 
 class BasePlayerManager(object):
@@ -43,23 +42,3 @@ class BasePlayerManager(object):
                 self.LOG.error("Player with name " + player.NAME + " already exists.")
                 return False
         return True
-
-    @staticmethod
-    def sort_players(players):
-        # Sort players by priority
-        players.sort(key=lambda p: p.get_conflict_priority(), reverse=True)
-        # Shuffle within priorities
-        left_index = 0
-        last_priority = None
-        for current_index, player in enumerate(players):
-            current_priority = player.get_conflict_priority()
-            if last_priority is not None:
-                if last_priority is not current_priority:
-                    right_index = current_index - 1
-                    shuffle(players[left_index:right_index])
-                    left_index = current_index
-            last_priority = current_priority
-        # shuffle the last section
-        right_index = len(players) - 1
-        shuffle(players[left_index:right_index])
-        return players

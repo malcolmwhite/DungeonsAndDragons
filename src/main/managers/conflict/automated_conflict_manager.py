@@ -1,7 +1,6 @@
 from random import randint
 
 from src.main.managers.conflict.base_conflict_manager import BaseConflictManager
-from src.main.managers.players.base_player_manager import BasePlayerManager
 
 
 class AutomatedConflictManager(BaseConflictManager):
@@ -16,6 +15,3 @@ class AutomatedConflictManager(BaseConflictManager):
             challenged_index = last_index
 
         return players[challenged_index]
-
-    def _sort_players(self, players):
-        return BasePlayerManager.sort_players(players)

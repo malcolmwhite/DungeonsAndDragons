@@ -1,4 +1,5 @@
 import logging
+from random import shuffle
 
 from src.main.utils.utils import join_multi_line_strings
 
@@ -124,9 +125,28 @@ class BaseConflictManager(object):
         raise NotImplementedError("_pick_conflict has not been implemented.")
 
     def _sort_players(self, players):
-        """
-        Abstract method for sorting players before a round.
-        :param players: List of players
-        :raise NotImplementedError: Method is abstract and must be overridden
-        """
-        raise NotImplementedError("_sort_players has not been implemented.")
+        # Sort players by priority
+        players.sort(key=lambda p: p.get_conflict_priority(), reverse=True)
+        # Shuffle within priorities
+        left_index = 0
+        last_priority = None
+        for current_index, player in enumerate(players):
+            current_priority = player.get_conflict_priority()
+            if last_priority is not None:
+                if last_priority is not current_priority:
+                    right_index = current_index - 1
+                    shuffle(players[left_index:right_index])
+                    left_index = current_index
+            last_priority = current_priority
+        # shuffle the last section
+        right_index = len(players) - 1
+        shuffle(players[left_index:right_index])
+
+        log_msg = "Player order is: "
+        for player in players:
+            log_msg += player.NAME + ", "
+        # Trim the final space and comma
+        log_msg = log_msg[:-2]
+        self.LOG.info(log_msg)
+
+        return players

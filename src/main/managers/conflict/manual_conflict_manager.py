@@ -1,5 +1,4 @@
 from src.main.managers.conflict.base_conflict_manager import BaseConflictManager
-from src.main.managers.players.base_player_manager import BasePlayerManager
 
 
 class ManualConflictManager(BaseConflictManager):
@@ -28,13 +27,6 @@ class ManualConflictManager(BaseConflictManager):
                 print "Name [{}] not recognized.\n".format(challenged_input)
 
         return challenged
-
-    def _sort_players(self, players):
-        ordered_players = BasePlayerManager.sort_players(players)
-        print "player order is :"
-        for player in ordered_players:
-            print "\t" + player.NAME
-        return ordered_players
 
     def _run_round(self, players):
         BaseConflictManager._run_round(self, players)
