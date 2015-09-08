@@ -109,8 +109,10 @@ class BasePlayer(object):
         summary = ""
         width = 25
         for attribute in self._LOG_ATTRIBUTES:
-            attribute_line = get_trimmed_or_padded_string(attribute(), width)
-            summary += attribute_line + "\n"
+            attribute_lines = attribute().splitlines()
+            for attribute_line in attribute_lines:
+                attribute_line = get_trimmed_or_padded_string(attribute_line, width)
+                summary += attribute_line + "\n"
         return summary
 
     def _get_attack_penalty(self):
