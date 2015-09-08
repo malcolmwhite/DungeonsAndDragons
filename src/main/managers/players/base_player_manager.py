@@ -16,7 +16,7 @@ class BasePlayerManager(object):
     def generate_players(self, num_players=None):
         raise NotImplementedError("Generate players has not been implemented.")
 
-    def initialize_round(self, shuffle_players=True):
+    def initialize_round(self):
         # Sort players by priority
         BasePlayerManager.sort_players(self._PLAYERS)
         # Shuffle priorities

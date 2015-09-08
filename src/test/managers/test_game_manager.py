@@ -1,8 +1,8 @@
 from unittest import TestCase
 
-from src.managers.conflict.hard_coded_example_conflict_manager import HardCodedExampleConflictManager
+from src.main.managers.conflict.hard_coded_example_conflict_manager import HardCodedExampleConflictManager
 from src.main.managers.game.base_game_manager import BaseGameManager
-from src.managers.players.hard_coded_player_manager import HardCodedPlayerManager
+from src.main.managers.players.hard_coded_player_manager import HardCodedPlayerManager
 
 
 class TestGameManager(TestCase):
