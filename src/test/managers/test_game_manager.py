@@ -8,7 +8,7 @@ from src.main.managers.players.hard_coded_player_manager import HardCodedPlayerM
 class TestGameManager(TestCase):
     def testStandardGame(self):
         game_manager = self.ExampleGameManager()
-        winner = game_manager.run()
+        winner = game_manager.play_game()
         self._validate_alice(winner)
         active_players = game_manager.player_manager.get_active_players()
         inactive_players = game_manager.player_manager.get_inactive_players()

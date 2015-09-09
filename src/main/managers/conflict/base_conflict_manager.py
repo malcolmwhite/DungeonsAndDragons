@@ -19,7 +19,7 @@ class BaseConflictManager(object):
         self.LOG = logging.getLogger(__name__)
         logging.basicConfig(level=logging.DEBUG)
 
-    def run(self):
+    def run_conflicts(self):
         """
         Begin conflicts. Conflicts will continue until one player remains
 

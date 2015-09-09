@@ -12,7 +12,7 @@ class TestModelConflictManager(TestCase):
     def testStandardConflict(self):
         player_manager = HardCodedPlayerManager()
         conflict_manager = HardCodedExampleConflictManager(player_manager)
-        winner = conflict_manager.run()
+        winner = conflict_manager.run_conflicts()
         self._validate_alice(winner)
         active_players = player_manager.get_active_players()
         inactive_players = player_manager.get_inactive_players()
