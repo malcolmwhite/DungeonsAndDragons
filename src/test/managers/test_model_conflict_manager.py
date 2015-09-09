@@ -4,7 +4,7 @@ from itertools import permutations
 from src.main.managers.players.hard_coded_player_manager import HardCodedPlayerManager
 from src.main.managers.conflict.hard_coded_example_conflict_manager import HardCodedExampleConflictManager
 from src.main.managers.conflict.automated_conflict_manager import AutomatedConflictManager
-from src.main.beans.players.base_player import StandardPlayer
+from src.main.beans.players.standard_player import StandardPlayer
 from src.main.managers.players.base_player_manager import BasePlayerManager
 
 

@@ -1,7 +1,7 @@
 from unittest import TestCase
 
 from src.main.managers.players.base_player_manager import BasePlayerManager
-from src.main.beans.players.base_player import StandardPlayer
+from src.main.beans.players.standard_player import StandardPlayer
 
 
 class TestPlayerManager(TestCase):

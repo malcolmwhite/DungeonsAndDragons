@@ -1,7 +1,7 @@
 from src.main.managers.items.item_manager import ItemManager
 from src.main.managers.items.hard_coded_alice_item_manager import HardCodedAliceItemManager
 from src.main.managers.players.base_player_manager import BasePlayerManager
-from src.main.beans.players.base_player import StandardPlayer
+from src.main.beans.players.standard_player import StandardPlayer
 from src.main.beans.items.spooky_hat import SpookyHat
 from src.main.beans.items.shield import Shield
 
