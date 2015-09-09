@@ -2,16 +2,15 @@ from src.main.managers.conflict.base_conflict_manager import BaseConflictManager
 
 
 class ManualConflictManager(BaseConflictManager):
-    def _determine_player_to_challenge(self, challenger, players, challenger_index):
+    def _determine_player_to_challenge(self, challenger, players):
         """
         Implementation of abstract method in BaseConflictManager.
         :param challenger: player determining who to challenge
         :param players: List of all players, including the challenger
-        :param challenger_index: index of challenger in players. Argument not used in this implementation
         :return: player challenged by challenger
         """
         if len(players) == 2:
-            return players[not challenger_index]
+            return players[0] if players[0].NAME.lower() != challenger.NAME.lower() else players[1]
 
         print "Specify challenger for {}".format(challenger.NAME)
         print "Players are:"

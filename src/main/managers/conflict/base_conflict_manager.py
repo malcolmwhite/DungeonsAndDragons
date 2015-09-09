@@ -32,12 +32,11 @@ class BaseConflictManager(object):
 
         return active_players[0]
 
-    def _determine_player_to_challenge(self, challenger, players, index):
+    def _determine_player_to_challenge(self, challenger, players):
         """
         Abstract method for specifying which player a given player will challenge
         :param challenger (BasePlayer): Player picking a player to challenge
         :param players: List of players to challenge
-        :param index: challenger's index. Value used to ensure the challenger does not challenge his/herself
         :raise NotImplementedError: Method is abstract and must be overridden
         """
         raise NotImplementedError("_pick_conflict has not been implemented.")
@@ -64,7 +63,7 @@ class BaseConflictManager(object):
         """
         challenge_map = dict()
         for index, challenger in enumerate(players):
-            challenged = self._determine_player_to_challenge(challenger, players, index)
+            challenged = self._determine_player_to_challenge(challenger, players)
             challenge_map[challenger] = challenged
         return challenge_map
 

@@ -4,6 +4,9 @@ from src.main.utils.utils import raise_
 
 
 class BaseItem(object):
+
+    # Name used to discern where item should be stored in item manager.
+    # Implementations of BaseItem should select a category name from ItemManager
     CATEGORY_NAME = lambda: raise_(NotImplementedError("CATEGORY_NAME is not implemented."))
 
     _AVERAGE_ATK_BOOST = 0
