@@ -5,9 +5,8 @@ from src.main.managers.items.item_manager import ItemManager
 
 
 class StandardPlayer(object):
-    _SPOOK_ROUNDS_AHEAD = 0
-    _SPOOK_PENALTY = 0
-
+    # Average values of core attributes.
+    # These values may be overridden by inheriting classes to customize the type of player
     _AVERAGE_SPEED = 0
     _AVERAGE_HP = 5
     _AVERAGE_DEF = 5
@@ -30,6 +29,10 @@ class StandardPlayer(object):
         self._ATK = int(atk) if atk is not None else generate_attribute(self._AVERAGE_ATK, self._ATK_SPREAD)
         self._LOG_ATTRIBUTES = [self.get_formatted_name, self.get_formatted_attack, self.get_formatted_defense,
                                 self.get_formatted_hp, self.get_formatted_items]
+
+        self._SPOOK_ROUNDS_AHEAD = 0
+        self._SPOOK_PENALTY = 0
+
 
     def __str__(self):
         return ''.join([str(self.NAME), ' ', str(self.HP)])
