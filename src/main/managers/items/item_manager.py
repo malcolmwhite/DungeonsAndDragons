@@ -2,6 +2,8 @@ from src.main.beans.items.base_item import BaseItem
 
 
 class ItemManager(object):
+
+    # Category names are used to validate item instances and to map them to their corresponding bags
     SWORD_CATEGORY_NAME = "SWORD"
     SHIELD_CATEGORY_NAME = "SHIELD"
     HAT_CATEGORY_NAME = "HAT"
@@ -55,6 +57,10 @@ class ItemManager(object):
         item_bag.sort(key=lambda x: x.PRIMARY_VALUE, reverse=True)
 
     def dump_all_items(self):
+        """
+        Remove all items from their bags and return as list. Item manager is empty after this is called.
+        :return: List of items previously contained by item manager
+        """
         dumped_items = []
         for category in self._CATEGORY_NAMES:
             item_bag = self._get_bag_for_category(category)
