@@ -32,6 +32,16 @@ class BaseConflictManager(object):
 
         return active_players[0]
 
+    def _determine_player_to_challenge(self, challenger, players, index):
+        """
+        Abstract method for specifying which player a given player will challenge
+        :param challenger (BasePlayer): Player picking a player to challenge
+        :param players: List of players to challenge
+        :param index: challenger's index. Value used to ensure the challenger does not challenge his/herself
+        :raise NotImplementedError: Method is abstract and must be overridden
+        """
+        raise NotImplementedError("_pick_conflict has not been implemented.")
+
     def _run_round(self, players):
         """
         Execute a round of conflicts for the given players.
@@ -113,16 +123,6 @@ class BaseConflictManager(object):
                 player_summary = player.get_summary()
                 overall_summary.append(player_summary)
         print join_multi_line_strings(overall_summary, cell_width)
-
-    def _determine_player_to_challenge(self, challenger, players, index):
-        """
-        Abstract method for specifying which player a given player will challenge
-        :param challenger (BasePlayer): Player picking a player to challenge
-        :param players: List of players to challenge
-        :param index: challenger's index. Value used to ensure the challenger does not challenge his/herself
-        :raise NotImplementedError: Method is abstract and must be overridden
-        """
-        raise NotImplementedError("_pick_conflict has not been implemented.")
 
     def _order_players_for_conflict(self, players):
         # Sort players by priority
