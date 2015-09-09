@@ -9,6 +9,11 @@ class HardCodedExampleConflictManager(AutomatedConflictManager):
         self.round = 0
 
     def _order_players_for_conflict(self, players):
+        """
+        Orders player to match problem statement
+        :param players: alice and bob
+        :return: alice and bob in their rightful order
+        """
         if self.ROUND_TO_REVERSE_MAP[self.round]:
             player0 = players[0]
             players[0] = players[1]

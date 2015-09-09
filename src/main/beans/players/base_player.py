@@ -4,7 +4,7 @@ from src.main.utils.utils import get_trimmed_or_padded_string
 from src.main.managers.items.item_manager import ItemManager
 
 
-class BasePlayer(object):
+class StandardPlayer(object):
     _SPOOK_ROUNDS_AHEAD = 0
     _SPOOK_PENALTY = 0
 
@@ -13,10 +13,13 @@ class BasePlayer(object):
     _AVERAGE_DEF = 5
     _AVERAGE_ATK = 5
 
+    # Spread values indicate the standard deviation from the attribute average when randomly generated.
+    # Values of zero indicate that the average value should be used.
+    # These values may be overridden by inheriting classes to customize the type of player
     _SPEED_SPREAD = 0
-    _HP_SPREAD = 2.5
-    _DEF_SPREAD = 2.5
-    _ATK_SPREAD = 2.5
+    _HP_SPREAD = 1
+    _DEF_SPREAD = 1
+    _ATK_SPREAD = 1
 
     def __init__(self, name, item_manager=None, speed=None, hp=None, defense=None, atk=None):
         self.NAME = name

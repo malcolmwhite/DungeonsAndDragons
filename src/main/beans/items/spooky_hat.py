@@ -8,7 +8,7 @@ class SpookyHat(BaseItem):
     _AVERAGE_SPOOK_RATE = 25
     _AVERAGE_SPOOK_POWER = 2
 
-    _SPOOK_RATE_SPREAD = 20
+    _SPOOK_RATE_SPREAD = 10
     _SPOOK_POWER_SPREAD = 1
 
     def __init__(self, attack=None, defense=None, speed=None, spook_rate=None, spook_power=None):

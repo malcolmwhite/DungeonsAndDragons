@@ -4,4 +4,6 @@ from src.main.managers.game.manual_game_manager import ManualGameManager
 if __name__ == '__main__':
     while query_yes_no("Would you like to play a game?"):
         game_mgr = ManualGameManager()
-        game_mgr.play_game()
+        winner = game_mgr.play_game()
+        print "Winner:"
+        print winner.get_summary()

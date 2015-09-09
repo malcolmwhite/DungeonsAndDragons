@@ -1,5 +1,5 @@
 from src.main.managers.players.base_player_manager import BasePlayerManager
-from src.main.beans.players.base_player import BasePlayer
+from src.main.beans.players.base_player import StandardPlayer
 from src.main.beans.items.spooky_hat import SpookyHat
 from src.main.beans.items.sword import Sword
 from src.main.beans.items.shoes import Shoes
@@ -24,7 +24,7 @@ class ManualPlayerManager(BasePlayerManager):
         defense = self._build_attribute_from_cmd("defense rating")
         hp = self._build_attribute_from_cmd("initial hp")
         speed = 0
-        player = BasePlayer(name, None, speed, hp, defense, atk)
+        player = StandardPlayer(name, None, speed, hp, defense, atk)
         item = self._build_item_from_cmd()
         player.add_item(item)
         return player

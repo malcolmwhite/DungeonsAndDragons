@@ -150,3 +150,7 @@ class BaseConflictManager(object):
         self.LOG.info(log_msg)
 
         return players
+
+    @staticmethod
+    def _validate_conflict_pair(challenger, challenged):
+        return challenger.NAME.lower() != challenged.NAME.lower()
