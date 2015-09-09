@@ -38,7 +38,7 @@ class BaseConflictManager(object):
         :param players: List of players
         """
         self.LOG.info("Beginning round.")
-        players = self._sort_players(players)
+        players = self._order_players_for_conflict(players)
         challenge_map = self._build_challenge_map(players)
         for challenger in players:
             if self.player_manager.get_num_active_players() > 1:
@@ -54,7 +54,7 @@ class BaseConflictManager(object):
         """
         challenge_map = dict()
         for index, challenger in enumerate(players):
-            challenged = self._pick_conflict(challenger, players, index)
+            challenged = self._determine_player_to_challenge(challenger, players, index)
             challenge_map[challenger] = challenged
         return challenge_map
 
@@ -114,7 +114,7 @@ class BaseConflictManager(object):
                 overall_summary.append(player_summary)
         print join_multi_line_strings(overall_summary, cell_width)
 
-    def _pick_conflict(self, challenger, players, index):
+    def _determine_player_to_challenge(self, challenger, players, index):
         """
         Abstract method for specifying which player a given player will challenge
         :param challenger (BasePlayer): Player picking a player to challenge
@@ -124,7 +124,7 @@ class BaseConflictManager(object):
         """
         raise NotImplementedError("_pick_conflict has not been implemented.")
 
-    def _sort_players(self, players):
+    def _order_players_for_conflict(self, players):
         # Sort players by priority
         players.sort(key=lambda p: p.get_conflict_priority(), reverse=True)
         # Shuffle within priorities

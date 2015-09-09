@@ -34,7 +34,7 @@ class TestModelConflictManager(TestCase):
             players_perm = list(players_perm)
             player_manager = BasePlayerManager(players_perm)
             conflict_manager = AutomatedConflictManager(player_manager)
-            sorted_players = conflict_manager._sort_players(players_perm)
+            sorted_players = conflict_manager._order_players_for_conflict(players_perm)
             self.validate_players(sorted_players, player0, player1, player2, player3)
 
     def validate_players(self, players, player0, player1, player2, player3):

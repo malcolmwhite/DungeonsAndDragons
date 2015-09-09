@@ -4,7 +4,7 @@ from src.main.managers.conflict.base_conflict_manager import BaseConflictManager
 
 
 class AutomatedConflictManager(BaseConflictManager):
-    def _pick_conflict(self, challenger, players, index):
+    def _determine_player_to_challenge(self, challenger, players, index):
         num_players = len(players)
         last_index = num_players - 1
 
