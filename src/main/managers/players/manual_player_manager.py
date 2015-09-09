@@ -17,6 +17,9 @@ class ManualPlayerManager(BasePlayerManager):
         while query_yes_no("Would you like to add a player?"):
             player = self._build_player_from_cmd()
             self.add_player(player)
+        if len(self._PLAYERS) == 0:
+            print "You must specify at least one player."
+            self.generate_players()
 
     def _build_player_from_cmd(self):
         name = raw_input("Please enter the player's name.\n\t")
