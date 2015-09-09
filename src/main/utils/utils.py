@@ -11,9 +11,11 @@ def generate_attribute(center_value, spread):
     if spread == 0:
         return center_value
     attribute = normal(center_value, spread)
-    min_value = 1
     # noinspection PyTypeChecker
+    # attributes are forced to be integers because we're not monsters
     attribute = int(ceil(attribute))
+    # attributes less than 1 are not useful in this context
+    min_value = 1
     return max(attribute, min_value)
 
 
@@ -50,32 +52,20 @@ def join_multi_line_strings(blocks, cell_width):
     return output
 
 
-def query_yes_no(question, default="yes"):
-    """Ask a yes/no question via raw_input() and return their answer.
+def query_yes_no(question):
 
-    "question" is a string that is presented to the user.
-    "default" is the presumed answer if the user just hits <Enter>.
-        It must be "yes" (the default), "no" or None (meaning
-        an answer is required of the user).
-
-    The "answer" return value is one of "yes" or "no".
+    """
+    Ask a yes/no question via the command line.
+    :param question: String containing question statement
+    :return: True for yes and False for no
     """
     valid = {"yes": True, "y": True, "ye": True, "no": False, "n": False}
-    if default is None:
-        prompt = " [y/n] "
-    elif default == "yes":
-        prompt = " [Y/n] "
-    elif default == "no":
-        prompt = " [y/N] "
-    else:
-        raise ValueError("invalid default answer: '%s'" % default)
+    prompt = " [y/n] "
 
     while 1:
         stdout.write(question + prompt)
         choice = raw_input().lower()
-        if default is not None and choice == '':
-            return default
-        elif choice in valid.keys():
+        if choice in valid.keys():
             return valid[choice]
         else:
             stdout.write("Please respond with 'yes' or 'no' (or 'y' or 'n').\n")
