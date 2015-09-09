@@ -34,7 +34,7 @@ class ItemManager(object):
             boost += self._SHOES_BAG[0].SPEED_BOOST
         return boost
 
-    def get_spook_params(self):
+    def get_spook_rate_and_power(self):
         rate = 0
         power = 0
         if self._HAT_BAG:

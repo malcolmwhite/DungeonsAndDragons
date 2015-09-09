@@ -73,15 +73,15 @@ class BaseConflictManager(object):
         :param challenger: Challenging player
         :param challenged: Challenged player
         """
-        challenger.initialize_conflict()
-        challenged.initialize_conflict()
+        challenger.initialize_confrontation()
+        challenged.initialize_confrontation()
         self.LOG.info("Beginning conflict. %s challenging %s.", challenger.NAME, challenged.NAME)
         if not challenger.is_active():
             self.LOG.info("Challenger %s is not active.", challenger.NAME)
         elif not challenged.is_active():
             self.LOG.info("Challenged player %s is not active.", challenged.NAME)
         else:
-            spook_rate, spook_power = challenged.get_spook_params()
+            spook_rate, spook_power = challenged.get_spook_rate_and_power()
             spook_success = challenger.receive_spook(spook_rate, spook_power)
             if spook_success:
                 self.LOG.info("%s spooked %s.", challenged.NAME, challenger.NAME)
@@ -101,8 +101,8 @@ class BaseConflictManager(object):
         :param challenger: Challenging player
         :param challenged: Challenged player
         """
-        challenger.finalize_conflict()
-        challenged.finalize_conflict()
+        challenger.finalize_confrontation()
+        challenged.finalize_confrontation()
         BaseConflictManager._log_player_results(True, challenger, challenged)
 
     @staticmethod
@@ -125,12 +125,12 @@ class BaseConflictManager(object):
 
     def _order_players_for_conflict(self, players):
         # Sort players by priority
-        players.sort(key=lambda p: p.get_conflict_priority(), reverse=True)
+        players.sort(key=lambda p: p.get_round_priority(), reverse=True)
         # Shuffle within priorities
         left_index = 0
         last_priority = None
         for current_index, player in enumerate(players):
-            current_priority = player.get_conflict_priority()
+            current_priority = player.get_round_priority()
             if last_priority is not None:
                 if last_priority is not current_priority:
                     right_index = current_index - 1

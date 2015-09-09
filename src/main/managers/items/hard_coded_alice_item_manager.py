@@ -6,7 +6,7 @@ class HardCodedAliceItemManager(ItemManager):
         ItemManager.__init__(self, items)
         self.first_run = True
 
-    def get_spook_params(self):
+    def get_spook_rate_and_power(self):
         power = 0
         if self._HAT_BAG:
             hat = self._HAT_BAG[0]

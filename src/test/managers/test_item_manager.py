@@ -46,7 +46,7 @@ class TestItemManager(TestCase):
         mgr.add_item(hat)
         retrieved_hat = mgr.get_hat()
         self.assertEquals(retrieved_hat, hat)
-        actual_spook_rate, actual_spook_power = mgr.get_spook_params()
+        actual_spook_rate, actual_spook_power = mgr.get_spook_rate_and_power()
         self.assertEqual(expected_spook_rate, actual_spook_rate)
         self.assertEqual(expected_spook_power, actual_spook_power)
 

@@ -33,23 +33,32 @@ class StandardPlayer(object):
         self._SPOOK_ROUNDS_AHEAD = 0
         self._SPOOK_PENALTY = 0
 
-
     def __str__(self):
         return ''.join([str(self.NAME), ' ', str(self.HP)])
 
-    def initialize_conflict(self):
+    def initialize_confrontation(self):
+        """
+        Implementation left for inheriting classes.
+        """
         pass
 
-    def finalize_conflict(self):
+    def finalize_confrontation(self):
+        """
+        Update accounting for tallies that change per round, such as whether a player is spooked.
+        """
         if self._SPOOK_ROUNDS_AHEAD > 0:
             self._decrement_spook()
 
-    def get_conflict_priority(self):
+    def get_round_priority(self):
+        """
+        Determine how early a player should act in a round.
+        :return: number indicating priority. Higher values map to earlier position
+        """
         boost = self.item_manager.get_speed_boost()
         return self._SPEED + boost
 
     def get_effective_attack(self):
-        if self.HP == 0:
+        if not self.is_active():
             return 0
 
         boost = self.item_manager.get_atk_boost()
@@ -62,37 +71,77 @@ class StandardPlayer(object):
         return self._DEF - penalty + boost
 
     def is_active(self):
+        """
+        Indicates whether or not a player can take action.
+        :return: True if player can take action
+        """
         return self.HP > 0
 
     def is_spooked(self):
+        """
+        Indicates whether or not a player is spooked.
+        :return: True if player is spooked
+        """
         return self._SPOOK_PENALTY > 0
 
     def add_item(self, item):
+        """
+        Add an item to the player's item manager
+        :param item: Item to be added
+        """
         self.item_manager.add_item(item)
 
     def add_items(self, items):
+        """
+        Add a list of items to a player's item manager
+        :param items: List of items
+        """
         self.item_manager.add_items(items)
 
     def dump_all_items(self):
+        """
+        Remove all items from a player's item manager and return them.
+        :return: List of items
+        """
         return self.item_manager.dump_all_items()
 
     def receive_attack(self, attack_points):
+        """
+        Receive an attack with the given number of attack points, taking into account a player's items and whether or
+        not they are spooked
+        :param attack_points: attack points that the player is attacked with
+        :return: amount of HP damage sustained in attack
+        """
         hp_loss = max(attack_points - self.get_effective_defense(), 1)
         hp_loss = min(self.HP, hp_loss)
         self.HP -= hp_loss
         return hp_loss
 
     def receive_spook(self, spook_rate, spook_power):
+        """
+        Receive a spook attack with the given rate and power
+        :param spook_rate: int percentage of spook success
+        :param spook_power: reduction to player's attack and defense if spook succeeds
+        :return: True if spook succeeds
+        """
         spook_success = False
         if simulate_chance(spook_rate):
             self._initialize_spook(spook_power)
             spook_success = True
         return spook_success
 
-    def get_spook_params(self):
-        return self.item_manager.get_spook_params()
+    def get_spook_rate_and_power(self):
+        """
+        Get a player's spook rate and power
+        :return: tuple (spook rate, spook power)
+        """
+        return self.item_manager.get_spook_rate_and_power()
 
     def get_formatted_name(self):
+        """
+        Get a player's name, formatted for printing
+        :return: formatted name
+        """
         name = self.NAME
         if self.is_spooked():
             name += " (spooked)"
