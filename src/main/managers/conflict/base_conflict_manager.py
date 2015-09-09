@@ -19,9 +19,9 @@ class BaseConflictManager(object):
         self.LOG = logging.getLogger(__name__)
         logging.basicConfig(level=logging.DEBUG)
 
-    def run_conflicts(self):
+    def run_conflict(self):
         """
-        Begin conflicts. Conflicts will continue until one player remains
+        Runs conflict. Conflict will continue until one player remains
 
         :return: (BasePlayer) winning player
         """
@@ -47,12 +47,12 @@ class BaseConflictManager(object):
         :param players: List of players
         """
         self.LOG.info("Beginning round.")
-        players = self._order_players_for_conflict(players)
+        players = self._order_players_for_new_round(players)
         challenge_map = self._build_challenge_map(players)
         for challenger in players:
             if self.player_manager.get_num_active_players() > 1:
                 challenged = challenge_map[challenger]
-                self._run_conflict(challenger, challenged)
+                self._run_confrontation(challenger, challenged)
 
     def _build_challenge_map(self, players):
         """
@@ -67,15 +67,15 @@ class BaseConflictManager(object):
             challenge_map[challenger] = challenged
         return challenge_map
 
-    def _run_conflict(self, challenger, challenged):
+    def _run_confrontation(self, challenger, challenged):
         """
-        Enact a conflict between two players.
+        Enact a confrontation between two players.
         :param challenger: Challenging player
         :param challenged: Challenged player
         """
         challenger.initialize_confrontation()
         challenged.initialize_confrontation()
-        self.LOG.info("Beginning conflict. %s challenging %s.", challenger.NAME, challenged.NAME)
+        self.LOG.info("Beginning confrontation. %s challenging %s.", challenger.NAME, challenged.NAME)
         if not challenger.is_active():
             self.LOG.info("Challenger %s is not active.", challenger.NAME)
         elif not challenged.is_active():
@@ -92,12 +92,12 @@ class BaseConflictManager(object):
                 self.LOG.info("%s has defeated %s and takes all of their items.", challenger.NAME, challenged.NAME)
                 items_won = challenged.dump_all_items()
                 challenger.add_items(items_won)
-        BaseConflictManager._finalize_conflict(challenger, challenged)
+        BaseConflictManager._finalize_confrontation(challenger, challenged)
 
     @staticmethod
-    def _finalize_conflict(challenger, challenged):
+    def _finalize_confrontation(challenger, challenged):
         """
-        Finalize players and log conflict results.
+        Finalize players and log confrontation results.
         :param challenger: Challenging player
         :param challenged: Challenged player
         """
@@ -108,7 +108,7 @@ class BaseConflictManager(object):
     @staticmethod
     def _log_player_results(only_active, *players):
         """
-        Log the results of a conflict.
+        Log the summaries of the given players.
         :param only_active (bool): Indicates if results should only be shown for active players
         :param players: List of players
         """
@@ -123,7 +123,7 @@ class BaseConflictManager(object):
                 overall_summary.append(player_summary)
         print join_multi_line_strings(overall_summary, cell_width)
 
-    def _order_players_for_conflict(self, players):
+    def _order_players_for_new_round(self, players):
         # Sort players by priority
         players.sort(key=lambda p: p.get_round_priority(), reverse=True)
         # Shuffle within priorities
@@ -133,14 +133,13 @@ class BaseConflictManager(object):
             current_priority = player.get_round_priority()
             if last_priority is not None:
                 if last_priority is not current_priority:
-                    right_index = current_index - 1
-                    shuffle(players[left_index:right_index])
-                    left_index = current_index
+                    right_index = current_index
+                    self._shuffle_slice(players, left_index, right_index)
+                    left_index = right_index
             last_priority = current_priority
         # shuffle the last section
         right_index = len(players) - 1
-        shuffle(players[left_index:right_index])
-
+        self._shuffle_slice(players, left_index, right_index)
         log_msg = "Player order is: "
         for player in players:
             log_msg += player.NAME + ", "
@@ -153,3 +152,9 @@ class BaseConflictManager(object):
     @staticmethod
     def _validate_conflict_pair(challenger, challenged):
         return challenger.NAME.lower() != challenged.NAME.lower()
+
+    @staticmethod
+    def _shuffle_slice(container, left_index, right_index):
+            slice_to_shuffle = container[left_index:right_index]
+            shuffle(slice_to_shuffle)
+            container[left_index:right_index] = slice_to_shuffle

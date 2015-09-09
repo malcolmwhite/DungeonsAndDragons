@@ -9,7 +9,7 @@ class BaseGameManager(object):
         self.conflict_manager = conflict_manager
 
     def play_game(self):
-        return self.conflict_manager.run_conflicts()
+        return self.conflict_manager.run_conflict()
 
     def _build_player_manager(self):
         raise_(NotImplementedError("This function has not been implemented"))

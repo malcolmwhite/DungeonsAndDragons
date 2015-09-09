@@ -8,7 +8,7 @@ class HardCodedExampleConflictManager(AutomatedConflictManager):
         AutomatedConflictManager.__init__(self, player_manager)
         self.round = 0
 
-    def _order_players_for_conflict(self, players):
+    def _order_players_for_new_round(self, players):
         """
         Orders player to match problem statement
         :param players: alice and bob

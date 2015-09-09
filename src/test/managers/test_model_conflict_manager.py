@@ -12,7 +12,7 @@ class TestModelConflictManager(TestCase):
     def testStandardConflict(self):
         player_manager = HardCodedPlayerManager()
         conflict_manager = HardCodedExampleConflictManager(player_manager)
-        winner = conflict_manager.run_conflicts()
+        winner = conflict_manager.run_conflict()
         self._validate_alice(winner)
         active_players = player_manager.get_active_players()
         inactive_players = player_manager.get_inactive_players()
@@ -34,7 +34,7 @@ class TestModelConflictManager(TestCase):
             players_perm = list(players_perm)
             player_manager = BasePlayerManager(players_perm)
             conflict_manager = AutomatedConflictManager(player_manager)
-            sorted_players = conflict_manager._order_players_for_conflict(players_perm)
+            sorted_players = conflict_manager._order_players_for_new_round(players_perm)
             self.validate_players(sorted_players, player0, player1, player2, player3)
 
     def validate_players(self, players, player0, player1, player2, player3):
