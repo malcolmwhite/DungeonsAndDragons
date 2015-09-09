@@ -36,6 +36,7 @@ class StandardPlayer(object):
     def __str__(self):
         return ''.join([str(self.NAME), ' ', str(self.HP)])
 
+    # noinspection PyMethodMayBeStatic
     def initialize_confrontation(self):
         """
         Implementation left for inheriting classes.
