@@ -90,11 +90,6 @@ class ItemManager(object):
         return output[:-1]
 
     @staticmethod
-    def _add_item_and_sort(item, items):
-        items.append(item)
-        items.sort()
-
-    @staticmethod
     def _get_active_item(items):
         if items:
             return items[0]
