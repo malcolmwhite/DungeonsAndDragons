@@ -8,8 +8,8 @@ class HardCodedAliceItemManager(ItemManager):
 
     def get_spook_params(self):
         power = 0
-        if self._HATS:
-            hat = self._HATS[0]
+        if self._HAT_BAG:
+            hat = self._HAT_BAG[0]
             hat_rate, hat_power = hat.get_spook_rate_and_power()
             power += hat_power
         if self.first_run:

@@ -2,43 +2,43 @@ from src.main.beans.items.base_item import BaseItem
 
 
 class ItemManager(object):
-    SWORD_CATEGORY_NAME = "_SWORDS"
-    SHIELD_CATEGORY_NAME = "_SHIELDS"
-    HAT_CATEGORY_NAME = "_HATS"
-    SHOE_CATEGORY_NAME = "_SHOES"
+    SWORD_CATEGORY_NAME = "SWORD"
+    SHIELD_CATEGORY_NAME = "SHIELD"
+    HAT_CATEGORY_NAME = "HAT"
+    SHOE_CATEGORY_NAME = "SHOES"
     _CATEGORY_NAMES = {SWORD_CATEGORY_NAME, SHIELD_CATEGORY_NAME, HAT_CATEGORY_NAME, SHOE_CATEGORY_NAME}
 
     def __init__(self, items=None):
-        self._SWORDS = []
-        self._SHIELDS = []
-        self._HATS = []
-        self._SHOES = []
+        self._SWORD_BAG = []
+        self._SHIELD_BAG = []
+        self._HAT_BAG = []
+        self._SHOES_BAG = []
         if items:
             self.add_items(items)
 
     def get_atk_boost(self):
         boost = 0
-        if self._SWORDS:
-            boost += self._SWORDS[0].ATTACK_BOOST
+        if self._SWORD_BAG:
+            boost += self._SWORD_BAG[0].ATTACK_BOOST
         return boost
 
     def get_def_boost(self):
         boost = 0
-        if self._SHIELDS:
-            boost += self._SHIELDS[0].DEFENSE_BOOST
+        if self._SHIELD_BAG:
+            boost += self._SHIELD_BAG[0].DEFENSE_BOOST
         return boost
 
     def get_speed_boost(self):
         boost = 0
-        if self._SHOES:
-            boost += self._SHOES[0].SPEED_BOOST
+        if self._SHOES_BAG:
+            boost += self._SHOES_BAG[0].SPEED_BOOST
         return boost
 
     def get_spook_params(self):
         rate = 0
         power = 0
-        if self._HATS:
-            hat = self._HATS[0]
+        if self._HAT_BAG:
+            hat = self._HAT_BAG[0]
             hat_rate, hat_power = hat.get_spook_rate_and_power()
             rate += hat_rate
             power += hat_power
@@ -50,29 +50,29 @@ class ItemManager(object):
     def add_item(self, item):
         self._validate_item(item)
         item_category = item.CATEGORY_NAME
-        item_list = getattr(self, item_category)
-        item_list.append(item)
-        item_list.sort(key=lambda x: x.PRIMARY_VALUE, reverse=True)
+        item_bag = self._get_bag_for_category(item_category)
+        item_bag.append(item)
+        item_bag.sort(key=lambda x: x.PRIMARY_VALUE, reverse=True)
 
     def dump_all_items(self):
         dumped_items = []
         for category in self._CATEGORY_NAMES:
-            items = getattr(self, category)
-            dumped_items.extend(items)
-            del items[:]
+            item_bag = self._get_bag_for_category(category)
+            dumped_items.extend(item_bag)
+            del item_bag[:]
         return dumped_items
 
     def get_sword(self):
-        return self._get_active_item(self._SWORDS)
+        return self._get_active_item(self._SWORD_BAG)
 
     def get_shield(self):
-        return self._get_active_item(self._SHIELDS)
+        return self._get_active_item(self._SHIELD_BAG)
 
     def get_hat(self):
-        return self._get_active_item(self._HATS)
+        return self._get_active_item(self._HAT_BAG)
 
     def get_shoes(self):
-        return self._get_active_item(self._SHOES)
+        return self._get_active_item(self._SHOES_BAG)
 
     def get_formatted_items(self):
         output = "Items: "
@@ -80,14 +80,18 @@ class ItemManager(object):
         regular_prefix = " " * 7
         first_item = True
         for category in self._CATEGORY_NAMES:
-            items = getattr(self, category)
-            for item in items:
+            item_bag = self._get_bag_for_category(category)
+            for item in item_bag:
                 line = prefix + item.get_formatted_name()
                 output = output + line + "\n"
                 if first_item:
                     prefix = regular_prefix
                     first_item = False
         return output[:-1]
+
+    def _get_bag_for_category(self, category_name):
+        bag_name = "_" + category_name + "_BAG"
+        return getattr(self, bag_name)
 
     @staticmethod
     def _get_active_item(items):
