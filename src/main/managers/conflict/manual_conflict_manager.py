@@ -36,5 +36,5 @@ class ManualConflictManager(BaseConflictManager):
         return challenged
 
     def _run_round(self, players):
-        raw_input("Press enter to begin round.")
+        raw_input("\n\nPress enter to begin round.\n\n")
         BaseConflictManager._run_round(self, players)
